@@ -41,7 +41,7 @@ const Hero = () => {
         <div
         className='relative'
         >
-            <Image src={'/pizza.png'} layout={'fill'} objectFit={'contain'} alt={'pizza'}/>
+            <Image src={'/pizza.png'} width={659} height={653} alt={'pizza'}/>
         </div>
     </section>
   )
