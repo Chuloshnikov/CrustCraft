@@ -17,7 +17,7 @@ const Hero = () => {
                 <span className='text-primary'>Pizza</span>
             </h1>
             <p
-            className='my-4 text-gray-500 text-sm'
+            className='my-6 text-gray-500 text-sm'
             >
                 Pizza is the missing piece that makes every day complete, a simple yet delicious joy in life
             </p>
