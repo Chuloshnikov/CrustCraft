@@ -6,7 +6,7 @@ const Header = () => {
     <header className="flex items-center justify-between">
         <Link 
         href={"/"}
-        className="text-primary font-semibold text-2xl"
+        className="text-primary font-black text-2xl"
         >
         CRUSTCRAFT
         </Link>
