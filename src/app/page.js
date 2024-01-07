@@ -49,7 +49,9 @@ export default function Home() {
       </p>
       </div>
     </section>
-    <section>
+    <section
+    className="text-center my-8"
+    >
       <SectionHeaders subHeader={'Don\'t hesitate'} mainHeader={'Contact us'}/>
       <a 
       className="text-4xl underline text-gray-500" 
@@ -58,8 +60,10 @@ export default function Home() {
         +98 563 256 77 71
       </a>
     </section>
-    <footer>
-      
+    <footer
+    className="border-t p-8 text-center text-gray-500 mt-16"
+    >
+      &copy; 2024 All rights reserved
     </footer>
   </>
   )
