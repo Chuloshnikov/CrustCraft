@@ -48,8 +48,19 @@ export default function Home() {
         remaining essentially unchanged. 
       </p>
       </div>
-      
     </section>
+    <section>
+      <SectionHeaders subHeader={'Don\'t hesitate'} mainHeader={'Contact us'}/>
+      <a 
+      className="text-4xl underline text-gray-500" 
+      href="tel:+985632567771"
+      >
+        +98 563 256 77 71
+      </a>
+    </section>
+    <footer>
+      
+    </footer>
   </>
   )
 }
