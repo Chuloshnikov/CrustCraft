@@ -5,7 +5,7 @@ import { HiOutlineArrowCircleRight } from "react-icons/hi";
 const Hero = () => {
   return (
     <section
-    className='hero'
+    className='hero mt-4'
     >
         <div
         className='py-12'
@@ -24,18 +24,18 @@ const Hero = () => {
             <div
             className='flex gap-4'
             >
-                <button
+                <div
                 className='bg-primary text-white px-4 py-2 rounded-full flex gap-2 items-center uppercase'
                 >
                     Order now
                     <HiOutlineArrowCircleRight className='w-6 h-6'/>
-                </button>
-                <button
+                </div>
+                <div
                 className='flex gap-2 py-2 items-center text-gray-400 font-semibold'
                 >
                     Learn more
                     <HiOutlineArrowCircleRight className='w-6 h-6'/>
-                </button>
+                </div>
             </div>
         </div>
         <div
