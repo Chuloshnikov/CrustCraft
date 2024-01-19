@@ -7,6 +7,7 @@ import {signIn} from "next-auth/react";
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] =useState('');
     const [creatingUser, setCreatingUser] = useState(false);
     const [userCreated, setUserCreated] = useState(false);
     const [error, setError] = useState(false);
@@ -19,7 +20,7 @@ export default function RegisterPage() {
         const response = await fetch('/api/register', {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
-        body: JSON.stringify({email, password}),
+        body: JSON.stringify({name, email, password}),
         });
         if (response.ok) {
             setUserCreated(true);
@@ -64,6 +65,13 @@ export default function RegisterPage() {
         className='block max-w-xs mx-auto'
         onSubmit={handleFormSubmit}
         >
+            <input 
+            type="text" 
+            placeholder="name" 
+            value={name} 
+            onChange={e => setName(e.target.value)}
+            disabled={creatingUser}
+            />
             <input 
             type="email" 
             placeholder="email" 
