@@ -1,18 +1,15 @@
 import {User} from "@/models/User";
-import bcrypt from "bcrypt";
 import mongoose from "mongoose";
+import { hash } from "bcryptjs";
 
 export async function POST(req) {
   const body = await req.json();
   mongoose.connect(process.env.MONGODB_URL);
-  const pass = body.password;
-  if (!pass?.length || pass.length < 5) {
+  if (!body.password?.length || body.password.length < 5) {
     new Error('password must be at least 5 characters');
   }
 
-  const notHashedPassword = pass;
-  const salt = bcrypt.genSaltSync(10);
-  body.password = bcrypt.hashSync(notHashedPassword, salt);
+  body.password = await hash(body.password, 12)
 
   const createdUser = await User.create(body);
   return Response.json(createdUser);
