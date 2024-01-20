@@ -2,9 +2,9 @@ import NextAuth, {getServerSession} from "next-auth";
 import clientPromise from "@/libs/mongoConnect";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 import {User} from '@/models/User';
+import { compare } from "bcryptjs";
 
 
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
@@ -30,9 +30,9 @@ export const authOptions = {
 
         mongoose.connect(process.env.MONGODB_URL);
         const user = await User.findOne({email});
-        const passwordOk = user && bcrypt.compareSync(password, user.password);
+        const checkPassword = await compare(credentials.password, user.password);
 
-        if (passwordOk) {
+        if (checkPassword) {
           return user;
         }
 
