@@ -30,9 +30,9 @@ export const authOptions = {
 
         mongoose.connect(process.env.MONGODB_URL);
         const user = await User.findOne({email});
-        const checkPassword = await compare(credentials.password, user.password);
+        
 
-        if (checkPassword) {
+        if (password === user.password) {
           return user;
         }
 
