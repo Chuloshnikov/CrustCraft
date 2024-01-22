@@ -8,7 +8,10 @@ export async function POST(req) {
   if (!body.password?.length || body.password.length < 5) {
     new Error('password must be at least 5 characters');
   }
+  
+  const {name, email, password } = body;
+  const hashedPassword = await hash(password, 12)
+  const createdUser = await User.create({name, email, password: hashedPassword});
 
-  const createdUser = await User.create(body);
   return Response.json(createdUser);
 }
