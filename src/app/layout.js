@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import {AppProvider} from "@/components/AppContext";
+import { Metadata } from 'next';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700', '900'] })
 
@@ -12,7 +13,9 @@ export const metadata = {
   Experience the perfection of handcrafted crusts and gourmet toppings in 
   every bite. A symphony of flavors awaits at your favorite pizza haven.`,
   icons: {
-    icon: '/icon.svg',
+    icon: [
+      '/icon.ico',
+    ]
   }
 }
 
