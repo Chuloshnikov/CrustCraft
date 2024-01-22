@@ -62,6 +62,17 @@ const Header = () => {
                     </Link>
                 </>
             )}
+            {status === 'loading' && (
+                <>
+                <Link href={'/login'}>Login</Link>
+                <Link 
+                href={'/register'}
+                className="bg-primary text-white px-8 py-2 rounded-full"
+                >
+                    Register
+                </Link>
+            </>
+            )}
            
         </nav>
  </header>
