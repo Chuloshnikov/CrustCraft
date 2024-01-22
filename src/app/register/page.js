@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import {signIn} from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
+import { redirect } from 'next/navigation'
 
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
@@ -11,6 +12,11 @@ export default function RegisterPage() {
     const [creatingUser, setCreatingUser] = useState(false);
     const [userCreated, setUserCreated] = useState(false);
     const [error, setError] = useState(false);
+    const session = useSession();
+
+    if (session.status === "authenticated") {
+        redirect('/');
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
