@@ -1,5 +1,4 @@
 import NextAuth, {getServerSession} from "next-auth";
-import clientPromise from "@/libs/mongoConnect";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import mongoose from "mongoose";
