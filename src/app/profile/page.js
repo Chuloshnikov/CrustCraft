@@ -8,22 +8,47 @@ import userImg from "../../../public/images/userImg.png";
 export default function ProfilePage() {
     const session = useSession();
     const [userName, setUserName] = useState(session.data?.user?.name || '');
+    const [image, setImage] = useState('');
+    const [saved, setSaved] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
     const {status} = session;
     
     useEffect(() => {
         if (status === 'authenticated') {
             setUserName(session.data.user.name);
+            setImage(session.data.user.image);
         }
 
-    }, [session, status])
+    }, [session, status]);
+
 
     const handleProfileInfoUpdate = async (e) => {
         e.preventDefault();
+        setSaved(false);
+        setIsSaving(true);
         const response = await fetch('/api/profile', {
                 method: 'PUT',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({name: userName})
             });
+            setIsSaving(false);
+        if (response.ok) {
+            setSaved(true);
+        }
+    }
+
+    const handleFileChange = async (e) => {
+        const files = e?.target.files; 
+        if (files?.length === 1) {
+            const data = new FormData;
+            data.set('files', files[0]);
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: data,
+            });
+            const link = await response.json();
+            setImage(link);
+        }   
     }
 
     if (status === "loading") {
@@ -34,13 +59,27 @@ export default function ProfilePage() {
         return redirect('/login');
     }
 
-    const userImage = session.data.user.image;
+    
     return (
         <section className="mt-8">
                 <h1
                 className='text-center text-primary text-4xl mb-4 font-medium'>
                     Profile
                 </h1>
+                {saved && (
+                    <h2
+                    className="text-center bg-green-200 p-4 max-w-md mx-auto border-2 border-green-500 rounded-lg"
+                    >
+                        Profile saved!
+                    </h2>
+                )}
+                {isSaving && (
+                    <h2
+                    className="text-center bg-blue-100 p-4 max-w-md mx-auto border-2 border-blue-300 rounded-lg"
+                    >
+                        Saving...
+                    </h2>
+                )}
                 <form 
                 onSubmit={handleProfileInfoUpdate}
                 className="max-w-md mx-auto"
@@ -51,12 +90,22 @@ export default function ProfilePage() {
                         <div
                         className="p-2 rounded-lg relative"
                         >
-                            <Image className="rounded-lg w-full h-full mb-1" src={userImage ? userImage : userImg} width={250} height={250} alt={'avatar'} />
-                            <button type="button">Change avatar</button>
+                            <div
+                            className="w-[100px] h-[100px]"
+                            >
+                                {image.length ? (
+                                    <Image className="rounded-lg w-full h-full mb-1" src={image} width={250} height={250}  alt={'avatar'} />
+                                ) : (
+                                    <Image className="rounded-lg w-full h-full mb-1" src={userImg} width={250} height={250} alt={'avatar'} />
+                                )}
+                            </div>
+                            <label>
+                                <input type="file" className="hidden" onChange={handleFileChange}/>
+                                <span className="block border border-gray-300 rounded-lg p-[4px] text-center cursor-pointer mt-2">Edit</span>
+                            </label>
                         </div>
                         <div
                         className="grow"
-                        
                         >
                             <input 
                             onChange={e => setUserName(e.target.value)}
