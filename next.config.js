@@ -8,19 +8,10 @@ const nextConfig = {
         },
         {
           protocol: 'https',
-          hostname: 'max-crust-craft.s3.amazonaws.com',
+          hostname: 'crust-craft.s3.amazonaws.com',
         },
       ]
     },
-    head: {
-        link: [
-          {
-            rel: 'icon',
-            type: 'image/ico',
-            href: '/favicon.ico',
-          },
-        ],
-      },
 }
 
 module.exports = nextConfig
