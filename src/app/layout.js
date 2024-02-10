@@ -11,11 +11,6 @@ export const metadata = {
   description: `CrustCraft: Where Artisanal Pies Meet Culinary Mastery. 
   Experience the perfection of handcrafted crusts and gourmet toppings in 
   every bite. A symphony of flavors awaits at your favorite pizza haven.`,
-  icons: {
-    icon: [
-      '/icon.svg',
-    ]
-  }
 }
 
 export default function RootLayout({ children }) {

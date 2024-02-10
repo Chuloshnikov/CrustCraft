@@ -11,6 +11,7 @@ export default function ProfilePage() {
     const [image, setImage] = useState('');
     const [saved, setSaved] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
     const {status} = session;
     
     useEffect(() => {
@@ -29,7 +30,7 @@ export default function ProfilePage() {
         const response = await fetch('/api/profile', {
                 method: 'PUT',
                 headers: {'Content-type': 'application/json'},
-                body: JSON.stringify({name: userName})
+                body: JSON.stringify({name: userName, image})
             });
             setIsSaving(false);
         if (response.ok) {
@@ -41,13 +42,15 @@ export default function ProfilePage() {
         const files = e?.target.files; 
         if (files?.length === 1) {
             const data = new FormData;
-            data.set('files', files[0]);
+            data.set('file', files[0]);
+            setIsUploading(true);
             const response = await fetch('/api/upload', {
                 method: 'POST',
-                body: data,
+                body: data
             });
             const link = await response.json();
             setImage(link);
+            setIsUploading(false);
         }   
     }
 
@@ -80,6 +83,13 @@ export default function ProfilePage() {
                         Saving...
                     </h2>
                 )}
+                {isUploading && (
+                    <h2
+                    className="text-center bg-blue-100 p-4 max-w-md mx-auto border-2 border-blue-300 rounded-lg"
+                    >
+                        Uploading...
+                    </h2>
+                )}
                 <form 
                 onSubmit={handleProfileInfoUpdate}
                 className="max-w-md mx-auto"
@@ -93,7 +103,7 @@ export default function ProfilePage() {
                             <div
                             className="w-[100px] h-[100px]"
                             >
-                                {image.length ? (
+                                {image?.length ? (
                                     <Image className="rounded-lg w-full h-full mb-1" src={image} width={250} height={250}  alt={'avatar'} />
                                 ) : (
                                     <Image className="rounded-lg w-full h-full mb-1" src={userImg} width={250} height={250} alt={'avatar'} />
