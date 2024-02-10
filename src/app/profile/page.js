@@ -4,6 +4,9 @@ import { useSession } from "next-auth/react";
 import {redirect} from "next/navigation";
 import Image from "next/image";
 import userImg from "../../../public/images/userImg.png";
+import SuccessBox from "../../components/layout/SuccessBox";
+import InfoBox from "../../components/layout/InfoBox";
+import ErrorBox from "../../components/layout/InfoBox";
 
 export default function ProfilePage() {
     const session = useSession();
@@ -12,6 +15,7 @@ export default function ProfilePage() {
     const [saved, setSaved] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
+    const [isError, setIsError] = useState(false);
     const {status} = session;
     
     useEffect(() => {
@@ -35,6 +39,8 @@ export default function ProfilePage() {
             setIsSaving(false);
         if (response.ok) {
             setSaved(true);
+        } else {
+            setIsError(true);
         }
     }
 
@@ -70,25 +76,24 @@ export default function ProfilePage() {
                     Profile
                 </h1>
                 {saved && (
-                    <h2
-                    className="text-center bg-green-200 p-4 max-w-md mx-auto border-2 border-green-500 rounded-lg"
-                    >
+                   <SuccessBox>
                         Profile saved!
-                    </h2>
+                   </SuccessBox>
                 )}
                 {isSaving && (
-                    <h2
-                    className="text-center bg-blue-100 p-4 max-w-md mx-auto border-2 border-blue-300 rounded-lg"
-                    >
+                    <InfoBox>
                         Saving...
-                    </h2>
+                    </InfoBox>
                 )}
                 {isUploading && (
-                    <h2
-                    className="text-center bg-blue-100 p-4 max-w-md mx-auto border-2 border-blue-300 rounded-lg"
-                    >
+                    <InfoBox>
                         Uploading...
-                    </h2>
+                    </InfoBox>
+                )}
+                 {isError && (
+                    <ErrorBox>
+                        Error...
+                    </ErrorBox>
                 )}
                 <form 
                 onSubmit={handleProfileInfoUpdate}
