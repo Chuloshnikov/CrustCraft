@@ -6,6 +6,8 @@ import Image from "next/image";
 import userImg from "../../../public/images/userImg.png";
 import toast from "react-hot-toast";
 
+import UserTabs from "../../components/layout/UserTabs";
+
 export default function ProfilePage() {
     const session = useSession();
     const [userName, setUserName] = useState(session.data?.user?.name || '');
@@ -15,6 +17,7 @@ export default function ProfilePage() {
     const [postalCode, setPostalCode] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
     const {status} = session;
     
     useEffect(() => {
@@ -30,6 +33,7 @@ export default function ProfilePage() {
                     setPostalCode(data.postalCode);
                     setCity(data.city);
                     setCountry(data.country);
+                    setIsAdmin(data.admin)
                 })
             })
         }
@@ -107,6 +111,7 @@ export default function ProfilePage() {
     
     return (
         <section className="mt-8">
+                <UserTabs isAdmin={isAdmin}/>
                 <h1
                 className='text-center text-primary text-4xl mb-4 font-medium'>
                     Profile
