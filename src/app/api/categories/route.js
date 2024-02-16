@@ -1,0 +1,16 @@
+import mongoose from "mongoose";
+import { Category } from "../../../models/Category";
+
+export async function POST(req) {
+    mongoose.connect(process.env.MONGO_URL);
+    const {name} = await req.json();
+    const categoryDoc = await Category.create({name});
+    return Response.json(categoryDoc);
+}
+
+export async function GET() {
+    mongoose.connect(process.env.MONGO_URL);
+    return Response.json(
+        await Category.find()
+    )
+}
