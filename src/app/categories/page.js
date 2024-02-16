@@ -24,28 +24,34 @@ export default function CategoriesPage() {
     }
     
 
-    async function handleNewCategorySubmit(e) {
+    async function handleCategorySubmit(e) {
         e.preventDefault();
         const creationPromise = new Promise(async (resolve, reject) => {
-            const response = await fetch('/api/categories', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name: categoryName})
-            });
-            setCategoryName('');
-            fetchCategories();
-            if (response.ok) {
-                resolve();
-            } else {
-                reject();
-            }
+          const data = {name:categoryName};
+          if (editCategory) {
+            data._id = editCategory._id;
+          }
+          const response = await fetch('/api/categories', {
+            method: editCategory ? 'PUT' : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          setCategoryName('');
+          fetchCategories();
+          setEditCategory(null);
+          if (response.ok)
+            resolve();
+          else
+            reject();
         });
         await toast.promise(creationPromise, {
-            loading: 'Creating your new category...',
-            success: 'Ctegory created!',
-            error: 'Error!'
-        })
-    }
+          loading: editCategory
+                     ? 'Updating category...'
+                     : 'Creating your new category...',
+          success: editCategory ? 'Category updated!' : 'Category created!',
+          error: 'Error!',
+        });
+      }
 
     if (profileLoading) {
         return 'Loading user info...';
@@ -61,7 +67,7 @@ export default function CategoriesPage() {
         >
             <UserTabs isAdmin={true}/>
             <form
-            onSubmit={handleNewCategorySubmit}
+            onSubmit={handleCategorySubmit}
             className="mt-8"
             >
                 <div className="flex gap-2 items-end">
@@ -93,7 +99,10 @@ export default function CategoriesPage() {
                 <h2 className='mt-8 text-sm text-gray-500'>Edit category:</h2>
                 {categories?.length > 0 && categories.map(category => (
                     <button
-                    onClick={() => setEditCategory(category)}
+                    onClick={() => {
+                        setEditCategory(category);
+                        setCategoryName(category.name);
+                    }}
                     className='bg-gray-200 rounded-xl py-2 px-4 flex gap-1 cursor-pointer mb-1'
                     >
                         <span className='text-gray-500'>edit category:</span>
