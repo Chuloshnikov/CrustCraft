@@ -68,7 +68,12 @@ export default function CategoriesPage() {
                     <div
                     className="grow"
                     >
-                        <label>New category name:</label>
+                        <label>
+                            {editCategory ? 'Update category' : 'New category name'}
+                            {editCategory && (
+                                <>:{editCategory.name}</>
+                            )}
+                        </label>
                         <input 
                         onChange={e => setCategoryName(e.target.value)}
                         type="text"
@@ -78,7 +83,9 @@ export default function CategoriesPage() {
                     <div
                     className="pb-2"
                     >
-                        <button type="submit">Create</button>
+                        <button className='border border-primary' type="submit">
+                            {editCategory ? 'Update' : 'Create'}
+                        </button>
                     </div>
                 </div>
             </form>
@@ -86,6 +93,7 @@ export default function CategoriesPage() {
                 <h2 className='mt-8 text-sm text-gray-500'>Edit category:</h2>
                 {categories?.length > 0 && categories.map(category => (
                     <button
+                    onClick={() => setEditCategory(category)}
                     className='bg-gray-200 rounded-xl py-2 px-4 flex gap-1 cursor-pointer mb-1'
                     >
                         <span className='text-gray-500'>edit category:</span>
