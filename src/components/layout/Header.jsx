@@ -18,26 +18,30 @@ const Header = () => {
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
             <Link 
             href={"/"}
-            className="text-primary font-black text-2xl"
+            className="text-primary font-black text-4xl"
             >
-            CRUSTCRAFT
+            C<span className='hidden md:inline'>RUST</span>C<span className='hidden md:inline'>RAFT</span>
             </Link>
-            <Link 
+            <Link
+            className='hidden lg:block' 
             href={'/'}
             >
                 Home
             </Link>
-            <Link 
+            <Link
+            className='hidden lg:block'  
             href={'/'}
             >
                 Menu
             </Link>
             <Link 
+            className='hidden lg:block'  
             href={'/'}
             >
                 About
             </Link>
             <Link 
+            className='hidden lg:block' 
             href={'/'}
             >
                 Contact
