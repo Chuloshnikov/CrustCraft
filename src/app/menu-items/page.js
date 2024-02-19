@@ -20,13 +20,18 @@ export default function MenuItemsPage() {
             <form
             className='mt-8 max-w-md mx-auto'
             >
-                <div className='flex items-end gap-2'>
-                    <div className='grow'>
-                        <label>Menu item name</label>
-                        <input type="text"/>
-                    </div>
+                <div className='flex items-start gap-4'>
                     <div>
-                        <button className='mb-2' type="submit">Create</button>
+                        image
+                    </div>
+                    <div className='grow'>
+                        <label>Item name</label>
+                        <input type="text"/>
+                        <label>Description</label>
+                        <input type="text"/>
+                        <label>Base Price</label>
+                        <input type="text"/>
+                        <button type='submit'>Save</button>
                     </div>
                 </div>
             </form>

@@ -2,11 +2,10 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import {redirect} from "next/navigation";
-import Image from "next/image";
-import userImg from "../../../public/images/userImg.png";
 import toast from "react-hot-toast";
 
 import UserTabs from "../../components/layout/UserTabs";
+import EditableImage from "../../components/layout/EditableImage"
 
 export default function ProfilePage() {
     const session = useSession();
@@ -74,33 +73,6 @@ export default function ProfilePage() {
         });
     }
 
-    const handleFileChange = async (e) => {
-        const files = e?.target.files; 
-        if (files?.length === 1) {
-            const data = new FormData;
-            data.set('file', files[0]);
-            
-
-            
-            const uploadPromise = fetch('/api/upload', {
-                    method: 'POST',
-                    body: data
-                }).then(response => {
-                    if (response.ok) {
-                    return response.json().then(link => {
-                            setImage(link);
-                        })
-                    } 
-                    throw new Error('Some thing went wrong')
-            });
-            
-            await toast.promise(uploadPromise, {
-                loading: 'Uploading...',
-                success: 'Upload complete',
-                error: 'Upload error',
-            })
-        }   
-    }
 
     if (status === "loading" || !profileFetched) {
         return 'loading...';
@@ -128,19 +100,7 @@ export default function ProfilePage() {
                         <div
                         className="p-2 rounded-lg relative"
                         >
-                            <div
-                            className="w-[100px] h-[100px] mt-2"
-                            >
-                                {image?.length ? (
-                                    <Image className="rounded-lg w-full h-full mb-1" src={image} width={250} height={250}  alt={'avatar'} />
-                                ) : (
-                                    <Image className="rounded-lg w-full h-full mb-1" src={userImg} width={250} height={250} alt={'avatar'} />
-                                )}
-                            </div>
-                            <label>
-                                <input type="file" className="hidden" onChange={handleFileChange}/>
-                                <span className="block border border-gray-300 rounded-lg p-[4px] text-center cursor-pointer mt-2">Edit</span>
-                            </label>
+                           <EditableImage link={image} setLink={setImage}/>
                         </div>
                         <div
                         className="grow"

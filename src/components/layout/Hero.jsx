@@ -25,13 +25,13 @@ const Hero = () => {
             className='flex gap-4'
             >
                 <div
-                className='bg-primary text-white px-4 py-2 rounded-full flex gap-2 items-center uppercase'
+                className='bg-primary text-white px-4 py-2 rounded-full flex gap-2 items-center uppercase cursor-pointer'
                 >
                     Order now
                     <HiOutlineArrowCircleRight className='w-6 h-6'/>
                 </div>
                 <div
-                className='flex gap-2 py-2 items-center text-gray-400 font-semibold'
+                className='flex gap-2 py-2 items-center text-gray-400 font-semibold cursor-pointer'
                 >
                     Learn more
                     <HiOutlineArrowCircleRight className='w-6 h-6'/>
