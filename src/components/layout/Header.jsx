@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import { useEffect } from 'react'
 import Link from "next/link";
 import { signOut, useSession } from 'next-auth/react';
 
@@ -11,7 +11,22 @@ const Header = () => {
     if (userName && userName.includes(" ")) {
         userName = userName.split(' ')[0];
     }
+    
+    const gmailCredentials = userData?.email.indexOf("gmail");
 
+    useEffect(() => {
+      if (gmailCredentials) {
+        fetch('/api/profile', {
+          method: 'POST',
+          headers: {'Content-type': 'application/json'},
+          body: JSON.stringify({
+              email: userData.email,
+              name: userData.name,
+              image: userData.image,
+          }),
+      });
+      }
+    },[gmailCredentials]);
   return (
     <header className="flex items-center justify-between">
         
