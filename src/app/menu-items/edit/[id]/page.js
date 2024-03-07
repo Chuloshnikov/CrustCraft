@@ -7,13 +7,13 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { redirect, useParams } from 'next/navigation';
+import MenuItemForm from '../../../../components/layout/MenuItemForm';
 
 export default function EditMenuItemPage() {
+    
     const {id} = useParams();
-    const [image, setImage] = useState('');
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [basePrice, setBasePrice] = useState('');
+
+    const [menuItem, setMenuItem] = useState(null);
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
 
@@ -21,17 +21,14 @@ export default function EditMenuItemPage() {
         fetch('/api/menu-items').then(res => {
             res.json().then(items => {
                 const item = items.find(item => item._id === id);
-                setImage(item.image);
-                setName(item.name);
-                setDescription(item.description);
-                setBasePrice(item.basePrice);
+                setMenuItem(item);
             });
         })
     }, []);
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        const data = {image, name, description, basePrice, _id: id};
+        const data = {...data, _id: id};
         const savingPromise = new Promise(async (resolve, reject) => {
             const response = await fetch('/api/menu-items', {
                 method: 'PUT',
@@ -80,37 +77,7 @@ export default function EditMenuItemPage() {
                 <HiOutlineArrowCircleLeft className='w-5 h-5'/>
             </Link>
         </div>
-        <form
-        onSubmit={handleFormSubmit} 
-        className='mt-8 max-w-md mx-auto'
-        >
-            <div className='flex items-start gap-4'>
-                <div>
-                    <EditableImage link={image} setLink={setImage}/>
-                </div>
-                <div className='grow'>
-                    <label>Item name</label>
-                    <input 
-                    onChange={e => setName(e.target.value)}
-                    value={name}
-                    type="text"
-                    />
-                    <label>Description</label>
-                    <input 
-                    onChange={e => setDescription(e.target.value)}
-                    value={description}
-                    type="text"
-                    />
-                    <label>Base Price</label>
-                    <input
-                    onChange={e => setBasePrice(e.target.value)}
-                    value={basePrice}
-                    type="text"
-                    />
-                    <button type='submit'>Save</button>
-                </div>
-            </div>
-        </form>
+        <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} />
     </section>
     )
 }
