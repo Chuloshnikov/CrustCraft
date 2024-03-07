@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import UserTabs from "@/components/layout/UserTabs";
 import { useProfile } from "../../components/UseProfile";
 import toast from "react-hot-toast";
+import DeleteButton from "../../components/menu/DeleteButton";
 
 export default function CategoriesPage() {
     
@@ -53,6 +54,27 @@ export default function CategoriesPage() {
         });
       }
 
+      async function handleDeleteClick(_id) {
+        const promise = new Promise(async (resolve, reject) => {
+          const response = await fetch('/api/categories?_id='+_id, {
+            method: 'DELETE',
+          });
+          if (response.ok) {
+            resolve();
+          } else {
+            reject();
+          }
+        });
+    
+        await toast.promise(promise, {
+          loading: 'Deleting...',
+          success: 'Deleted',
+          error: 'Error',
+        });
+    
+        fetchCategories();
+      }
+
     if (profileLoading) {
         return 'Loading user info...';
     }
@@ -98,16 +120,22 @@ export default function CategoriesPage() {
             <div>
                 <h2 className='mt-8 text-sm text-gray-500'>Edit category:</h2>
                 {categories?.length > 0 && categories.map(category => (
-                    <button
-                    onClick={() => {
-                        setEditCategory(category);
-                        setCategoryName(category.name);
-                    }}
+                    <div
                     className='bg-gray-200 rounded-xl py-2 px-4 flex gap-1 cursor-pointer mb-1'
                     >
-                        <span className='text-gray-500'>edit category:</span>
-                        <span>{category.name}</span>
-                    </button>
+                        <button 
+                        onClick={() => {
+                            setEditCategory(category);
+                            setCategoryName(category.name);
+                        }}
+                        className='text-gray-500 cursor-pointer'
+                        >
+                            edit category: {category.name}
+                        </button>
+                        <DeleteButton
+                            label="Delete"
+                            onDelete={() => handleDeleteClick(category._id)} />
+                    </div>
                 ))}
             </div>
         </section>
