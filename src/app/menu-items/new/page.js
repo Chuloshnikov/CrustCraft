@@ -7,7 +7,6 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { redirect } from 'next/navigation';
-import MenuItemForm from '../../../components/layout/MenuItemForm';
 
 export default function NewMenuItemPage() {
 

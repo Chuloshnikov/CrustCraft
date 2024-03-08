@@ -7,7 +7,6 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { redirect, useParams } from 'next/navigation';
-import MenuItemForm from '../../../../components/layout/MenuItemForm';
 
 export default function EditMenuItemPage() {
     
@@ -111,8 +110,10 @@ export default function EditMenuItemPage() {
                     value={basePrice}
                     type="text"
                     />
-                    <div>
-                        
+                    <div
+                    className='bg-gray-200 p-2 rounded-md mb-2'
+                    >
+                        <label>Sizes</label>
                     </div>
                     <button type='submit'>Save</button>
                 </div>
