@@ -16,6 +16,7 @@ export default function EditMenuItemPage() {
     const [menuItem, setMenuItem] = useState(null);
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
+    console.log(menuItem);
 
     useEffect(() => {
         fetch('/api/menu-items').then(res => {

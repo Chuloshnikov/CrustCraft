@@ -1,3 +1,4 @@
+"use client"
 import {useState, useEffect} from 'react';
 import EditableImage from './EditableImage';
 
@@ -10,7 +11,7 @@ const MenuItemForm = ({onSubmit, menuItem}) => {
 
   return (
     <form
-        onSubmit={onSubmit} 
+        onSubmit={e => onSubmit(e , {image, name, description, basePrice})} 
         className='mt-8 max-w-md mx-auto'
         >
             <div className='flex items-start gap-4'>
