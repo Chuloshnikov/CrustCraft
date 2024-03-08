@@ -18,7 +18,7 @@ export default function EditMenuItemPage() {
     const [description, setDescription] = useState('');
     const [basePrice, setBasePrice] = useState('');
     const [sizes, setSizes] = useState([]);
-    const [extraIngredientsPrices, setExtraIngredientsPrices] = useState([]);
+    const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
 
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
@@ -31,13 +31,15 @@ export default function EditMenuItemPage() {
                 setName(item.name);
                 setDescription(item.description);
                 setBasePrice(item.basePrice);
+                setSizes(item.sizes);
+                setExtraIngredientPrices(item.extraIngredientPrices);
             });
         })
     }, []);
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        const data = {image, name, description, basePrice, _id: id};
+        const data = {image, name, description, basePrice, sizes, extraIngredientPrices, _id: id};
         const savingPromise = new Promise(async (resolve, reject) => {
             const response = await fetch('/api/menu-items', {
                 method: 'PUT',
@@ -115,19 +117,19 @@ export default function EditMenuItemPage() {
                     />
                     <MenuItemPriceProps 
                     name={'Sizes'} 
-                    priceLabel={'Size name'}
-                    titleLabel={'Extra price'}
+                    titleLabel={'Size name'}
+                    priceLabel={'Extra price'}
                     addLabel={'Add items size'}
                     props={sizes} 
                     setProps={setSizes}
                     />
                     <MenuItemPriceProps 
                     name={'Extra ingredients'}
-                    priceLabel={'Name'}
-                    titleLabel={'Price'}
+                    titleLabel={'Name'}
+                    priceLabel={'Price'}
                     addLabel={'Add ingredients prices'}
-                    props={extraIngredientsPrices}
-                    setProps={setExtraIngredientsPrices}
+                    props={extraIngredientPrices}
+                    setProps={setExtraIngredientPrices}
                     />
                     <button type='submit'>Save</button>
                 </div>

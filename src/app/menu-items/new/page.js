@@ -16,7 +16,7 @@ export default function NewMenuItemPage() {
     const [description, setDescription] = useState('');
     const [basePrice, setBasePrice] = useState('');
     const [sizes, setSizes] = useState([]);
-    const [extraIngredientsPrices, setExtraIngredientsPrices] = useState([]);
+    const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
 
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
@@ -24,7 +24,7 @@ export default function NewMenuItemPage() {
     async function handleFormSubmit(e) {
         e.preventDefault();
 
-        const data = {image, name, description, basePrice};
+        const data = {image, name, description, basePrice, sizes, extraIngredientPrices};
         const savingPromise = new Promise(async (resolve, reject) => {
             const response = await fetch('/api/menu-items', {
                 method: 'POST',
@@ -113,8 +113,8 @@ export default function NewMenuItemPage() {
                     priceLabel={'Name'}
                     titleLabel={'Price'}
                     addLabel={'Add ingredients prices'}
-                    props={extraIngredientsPrices}
-                    setProps={setExtraIngredientsPrices}
+                    props={extraIngredientPrices}
+                    setProps={setExtraIngredientPrices}
                     />
                     <button type='submit'>Save</button>
                 </div>
