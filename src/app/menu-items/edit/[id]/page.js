@@ -18,6 +18,7 @@ export default function EditMenuItemPage() {
     const [description, setDescription] = useState('');
     const [basePrice, setBasePrice] = useState('');
     const [sizes, setSizes] = useState([]);
+    const [extraIngredientsPrices, setExtraIngredientsPrices] = useState([]);
 
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
@@ -114,9 +115,19 @@ export default function EditMenuItemPage() {
                     />
                     <MenuItemPriceProps 
                     name={'Sizes'} 
+                    priceLabel={'Size name'}
+                    titleLabel={'Extra price'}
                     addLabel={'Add items size'}
                     props={sizes} 
                     setProps={setSizes}
+                    />
+                    <MenuItemPriceProps 
+                    name={'Extra ingredients'}
+                    priceLabel={'Name'}
+                    titleLabel={'Price'}
+                    addLabel={'Add ingredients prices'}
+                    props={extraIngredientsPrices}
+                    setProps={setExtraIngredientsPrices}
                     />
                     <button type='submit'>Save</button>
                 </div>
