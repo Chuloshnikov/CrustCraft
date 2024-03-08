@@ -13,23 +13,29 @@ export default function EditMenuItemPage() {
     
     const {id} = useParams();
 
-    const [menuItem, setMenuItem] = useState(null);
+    const [image, setImage] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [basePrice, setBasePrice] = useState('');
+
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
-    console.log(menuItem);
 
     useEffect(() => {
         fetch('/api/menu-items').then(res => {
             res.json().then(items => {
                 const item = items.find(item => item._id === id);
-                setMenuItem(item);
+                setImage(item.image);
+                setName(item.name);
+                setDescription(item.description);
+                setBasePrice(item.basePrice);
             });
         })
     }, []);
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        const data = {...data, _id: id};
+        const data = {image, name, description, basePrice, _id: id};
         const savingPromise = new Promise(async (resolve, reject) => {
             const response = await fetch('/api/menu-items', {
                 method: 'PUT',
@@ -78,7 +84,37 @@ export default function EditMenuItemPage() {
                 <HiOutlineArrowCircleLeft className='w-5 h-5'/>
             </Link>
         </div>
-        <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} />
+        <form
+        onSubmit={handleFormSubmit} 
+        className='mt-8 max-w-md mx-auto'
+        >
+            <div className='flex items-start gap-4'>
+                <div>
+                    <EditableImage link={image} setLink={setImage}/>
+                </div>
+                <div className='grow'>
+                    <label>Item name</label>
+                    <input 
+                    onChange={e => setName(e.target.value)}
+                    value={name}
+                    type="text"
+                    />
+                    <label>Description</label>
+                    <input 
+                    onChange={e => setDescription(e.target.value)}
+                    value={description}
+                    type="text"
+                    />
+                    <label>Base Price</label>
+                    <input
+                    onChange={e => setBasePrice(e.target.value)}
+                    value={basePrice}
+                    type="text"
+                    />
+                    <button type='submit'>Save</button>
+                </div>
+            </div>
+        </form>
     </section>
     )
 }
