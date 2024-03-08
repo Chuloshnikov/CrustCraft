@@ -111,6 +111,9 @@ export default function EditMenuItemPage() {
                     value={basePrice}
                     type="text"
                     />
+                    <div>
+                        
+                    </div>
                     <button type='submit'>Save</button>
                 </div>
             </div>
