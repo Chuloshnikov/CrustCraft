@@ -7,6 +7,7 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { redirect } from 'next/navigation';
+import MenuItemPriceProps from '@/components/layout/MenuItemPriceProps';
 
 export default function NewMenuItemPage() {
 
@@ -14,6 +15,7 @@ export default function NewMenuItemPage() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [basePrice, setBasePrice] = useState('');
+    const [sizes, setSizes] = useState([]);
 
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
@@ -96,6 +98,12 @@ export default function NewMenuItemPage() {
                     onChange={e => setBasePrice(e.target.value)}
                     value={basePrice}
                     type="text"
+                    />
+                    <MenuItemPriceProps 
+                    name={'Sizes'} 
+                    addLabel={'Add items size'}
+                    props={sizes} 
+                    setProps={setSizes}
                     />
                     <button type='submit'>Save</button>
                 </div>
