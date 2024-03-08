@@ -3,6 +3,8 @@ import EditableImage from '@/components/layout/EditableImage';
 import UserTabs from '../../../../components/layout/UserTabs';
 import {useProfile} from '../../../../components/UseProfile';
 import { HiOutlineArrowCircleLeft } from "react-icons/hi";
+import { BsPlusLg } from "react-icons/bs";
+import { PiTrash } from "react-icons/pi";
 import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
@@ -16,6 +18,7 @@ export default function EditMenuItemPage() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [basePrice, setBasePrice] = useState('');
+    const [sizes, setSizes] = useState([]);
 
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
@@ -57,6 +60,29 @@ export default function EditMenuItemPage() {
 
         setRedirectToItems(true);
     }
+
+    {/*sizes scripts start*/}
+
+    function addSize() {
+        setSizes(oldSizes => {
+            return [...oldSizes, {name: '', price: 0}]
+        });
+    }
+
+    function editSize(e, index, prop) {
+        const newValue = e.target.value;
+        setSizes(prevSizes => {
+            const newSizes = [...prevSizes];
+            newSizes[index][prop] = newValue;
+            return newSizes;
+        })
+    }
+
+    function removeSize(indexToRemove) {
+        setSizes(prev => prev.filter((value, index) => index !== indexToRemove))
+    }
+
+    {/*sizes scripts end*/}
 
     if (redirectToItems) {
         return redirect('/menu-items');
@@ -114,6 +140,47 @@ export default function EditMenuItemPage() {
                     className='bg-gray-200 p-2 rounded-md mb-2'
                     >
                         <label>Sizes</label>
+                        {sizes?.length > 0 && sizes.map((size, index) => (
+                            <div
+                            key={index}
+                            className='flex items-end gap-2'
+                            >
+                                <div>
+                                    <label>Size name</label>
+                                    <input 
+                                    onChange={e => editSize(e, index, 'name')}
+                                    type="text" 
+                                    placeholder="Size name" 
+                                    value={size.name}
+                                    />
+                                </div>
+                                <div>
+                                    <label>Extra price</label>
+                                    <input
+                                    onChange={e => editSize(e, index, 'price')} 
+                                    type="text" 
+                                    placeholder='Extra price' 
+                                    value={size.price}
+                                    />
+                                </div>
+                                <div>
+                                    <button 
+                                    onClick={() => removeSize(index)}
+                                    type='button' 
+                                    className='bg-white mb-[9px] px-2'>
+                                        <PiTrash className='w-6 h-6'/>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                        <button 
+                        type='button'
+                        onClick={addSize}
+                        className='bg-white flex gap-1 items-center'
+                        >
+                            <BsPlusLg className='w-4 h-4'/>
+                            <span>Add item size</span>
+                        </button>
                     </div>
                     <button type='submit'>Save</button>
                 </div>
