@@ -2,7 +2,7 @@ import {useState} from 'react'
 import { BsPlusLg } from "react-icons/bs";
 import { PiTrash } from "react-icons/pi";
 
-const MenuItemPriceProps = ({name, addLabel, props, setProps}) => {
+const MenuItemPriceProps = ({name, titleLabel, priceLabel, addLabel, props, setProps}) => {
 
 
     function addProp() {
@@ -36,7 +36,7 @@ const MenuItemPriceProps = ({name, addLabel, props, setProps}) => {
             className='flex items-end gap-2'
             >
                 <div>
-                    <label>Size name</label>
+                    <label>{titleLabel}</label>
                     <input 
                     onChange={e => editProp(e, index, 'name')}
                     type="text" 
@@ -45,7 +45,7 @@ const MenuItemPriceProps = ({name, addLabel, props, setProps}) => {
                     />
                 </div>
                 <div>
-                    <label>Extra price</label>
+                    <label>{priceLabel}</label>
                     <input
                     onChange={e => editProp(e, index, 'price')} 
                     type="text" 
