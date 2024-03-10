@@ -28,7 +28,7 @@ export default function DeleteButton({ label, onDelete}) {
   }
 
   return (
-    <button type="button" onClick={() => setShowConfirm(true)}>
+    <button className="max-w-max" type="button" onClick={() => setShowConfirm(true)}>
       {label}
     </button>
   );
