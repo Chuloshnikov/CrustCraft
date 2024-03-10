@@ -19,6 +19,8 @@ export default function EditMenuItemPage() {
     const [description, setDescription] = useState('');
     const [basePrice, setBasePrice] = useState('');
     const [sizes, setSizes] = useState([]);
+    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
     const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
 
     const [redirectToItems, setRedirectToItems] = useState(false);
@@ -31,16 +33,25 @@ export default function EditMenuItemPage() {
                 setImage(item.image);
                 setName(item.name);
                 setDescription(item.description);
+                setCategory(item.category);
                 setBasePrice(item.basePrice);
                 setSizes(item.sizes);
                 setExtraIngredientPrices(item.extraIngredientPrices);
             });
-        })
-    }, []);
+        });
+
+        fetch('/api/categories').then(res => {
+            res.json().then(categories => {
+                setCategories(categories);
+            })
+        });
+    }, [id]);
+
+
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        const data = {image, name, description, basePrice, sizes, extraIngredientPrices, _id: id};
+        const data = {image, name, description, basePrice, sizes, extraIngredientPrices, category, _id: id};
         const savingPromise = new Promise(async (resolve, reject) => {
             const response = await fetch('/api/menu-items', {
                 method: 'PUT',
@@ -112,7 +123,7 @@ export default function EditMenuItemPage() {
         </div>
         <form
         onSubmit={handleFormSubmit} 
-        className='mt-8 max-w-md mx-auto'
+        className='mt-8 max-w-xl mx-auto'
         >
             <div className='flex items-start gap-4'>
                 <div>
@@ -131,6 +142,12 @@ export default function EditMenuItemPage() {
                     value={description}
                     type="text"
                     />
+                    <label>Category</label>
+                    <select value={category} onChange={e => setCategory(e.target.value)}>
+                        {categories?.length > 0 && categories.map(cat => (
+                            <option key={cat._id} value={cat._id}>{cat.name}</option>
+                        ))}
+                    </select>
                     <label>Base Price</label>
                     <input
                     onChange={e => setBasePrice(e.target.value)}

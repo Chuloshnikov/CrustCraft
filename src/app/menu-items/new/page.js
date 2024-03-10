@@ -17,14 +17,23 @@ export default function NewMenuItemPage() {
     const [basePrice, setBasePrice] = useState('');
     const [sizes, setSizes] = useState([]);
     const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
-
+    const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState('');
     const [redirectToItems, setRedirectToItems] = useState(false);
     const {loading, data} = useProfile();
+
+    useEffect(() => {
+        fetch('/api/categories').then(res => {
+            res.json().then(categories => {
+                setCategories(categories);
+            })
+        });
+    }, []);
 
     async function handleFormSubmit(e) {
         e.preventDefault();
 
-        const data = {image, name, description, basePrice, sizes, extraIngredientPrices};
+        const data = {image, name, description, basePrice, sizes, extraIngredientPrices, category};
         const savingPromise = new Promise(async (resolve, reject) => {
             const response = await fetch('/api/menu-items', {
                 method: 'POST',
@@ -63,7 +72,7 @@ export default function NewMenuItemPage() {
         <section className="mt-8">
         <UserTabs isAdmin={true}/>
         <div
-        className='max-w-md mx-auto mt-8'
+        className='max-w-xl mx-auto mt-8'
         >
             <Link 
             className='button items-center justify-between'
@@ -94,6 +103,12 @@ export default function NewMenuItemPage() {
                     value={description}
                     type="text"
                     />
+                    <label>Category</label>
+                    <select value={category} onChange={e => setCategory(e.target.value)}>
+                        {categories?.length > 0 && categories.map(cat => (
+                            <option key={cat._id} value={cat._id}>{cat.name}</option>
+                        ))}
+                    </select>
                     <label>Base Price</label>
                     <input
                     onChange={e => setBasePrice(e.target.value)}
