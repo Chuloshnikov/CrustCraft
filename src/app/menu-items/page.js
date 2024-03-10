@@ -29,6 +29,10 @@ export default function MenuItemsPage() {
     return (
     <section className='mt-8 max-w-xl mx-auto'>
         <UserTabs isAdmin={true}/>
+        <h1
+        className='text-center text-primary text-4xl mt-4 mb-4 font-medium'>
+            Menu items
+        </h1>
         <div
         className='mt-8'
         >

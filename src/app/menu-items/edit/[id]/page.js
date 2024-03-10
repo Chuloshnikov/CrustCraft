@@ -110,6 +110,10 @@ export default function EditMenuItemPage() {
     return (
         <section className="mt-8">
         <UserTabs isAdmin={true}/>
+        <h1
+        className='text-center text-primary text-4xl mt-4 mb-4 font-medium'>
+            Edit item
+        </h1>
         <div
         className='max-w-md mx-auto mt-8'
         >
