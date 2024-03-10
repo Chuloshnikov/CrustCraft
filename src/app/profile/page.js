@@ -92,7 +92,7 @@ export default function ProfilePage() {
                 </h1>
                 <form 
                 onSubmit={handleProfileInfoUpdate}
-                className="max-w-md mx-auto"
+                className="max-w-xl mx-auto"
                 >
                     <div
                     className="flex gap-4"
@@ -135,7 +135,7 @@ export default function ProfilePage() {
                             <div
                             className="flex gap-2"
                             >
-                                <div>
+                                <div className="w-full">
                                     <label>Postal code</label>
                                     <input 
                                     onChange={e => setPostalCode(e.target.value)}
@@ -144,7 +144,7 @@ export default function ProfilePage() {
                                     value={postalCode}
                                     />
                                 </div>
-                               <div>
+                               <div className="w-full">
                                     <label>City</label>
                                     <input 
                                     onChange={e => setCity(e.target.value)}

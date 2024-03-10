@@ -38,11 +38,14 @@ const EditableImage = ({link, setLink}) => {
             className="w-[100px] h-[100px] mt-2"
             >
                 {link?.length ? (
-                    <Image className="rounded-lg w-full h-full mb-1" src={link} width={250} height={250}  alt={'avatar'} />
+                    <Image className="rounded-lg w-full h-full mb-1" src={link} width={250} height={250}  alt={'image'} />
                 ) : (
-                    <Image className="rounded-lg w-full h-full mb-1" src={userImg} width={250} height={250} alt={'avatar'} />
+                    <div
+                    className="w-full h-full flex justify-center items-center bg-gray-200 rounded-xl text-gray-500"
+                    >
+                        <span>No image</span>
+                    </div> 
                 )}
-                
             </div>
             <label>
                 <input type="file" className="hidden" onChange={handleFileChange}/>
