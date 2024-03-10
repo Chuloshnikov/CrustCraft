@@ -99,7 +99,7 @@ export default function CategoriesPage() {
                         <label>
                             {editCategory ? 'Update category' : 'New category name'}
                             {editCategory && (
-                                <>:{editCategory.name}</>
+                                <>:{" "}{editCategory.name}</>
                             )}
                         </label>
                         <input 
@@ -109,10 +109,22 @@ export default function CategoriesPage() {
                         />
                     </div>
                     <div
-                    className="pb-2"
+                    className="pb-2 flex gap-2"
                     >
-                        <button className='border border-primary' type="submit">
+                        <button 
+                        className='border border-primary' 
+                        type="submit"
+                        >
                             {editCategory ? 'Update' : 'Create'}
+                        </button>
+                        <button
+                        type="button"
+                        onClick={() => {
+                          setEditCategory(null);
+                          setCategoryName('');
+                        }}
+                        >
+                            Cancel
                         </button>
                     </div>
                 </div>
@@ -121,20 +133,26 @@ export default function CategoriesPage() {
                 <h2 className='mt-8 text-sm text-gray-500'>Edit category:</h2>
                 {categories?.length > 0 && categories.map(category => (
                     <div
-                    className='bg-gray-200 rounded-xl py-2 px-4 flex gap-1 cursor-pointer mb-1'
+                    className='bg-gray-200 rounded-xl py-2 px-4 flex justify-between gap-1 mb-1 items-center'
                     >
+                      <span className='w-[50%] text-lg font-semibold text-gray-500'>{category.name}</span>
+                      <div
+                      className='flex gap-1'
+                      >
                         <button 
-                        onClick={() => {
-                            setEditCategory(category);
-                            setCategoryName(category.name);
-                        }}
-                        className='text-gray-500 cursor-pointer'
-                        >
-                            edit category: {category.name}
-                        </button>
-                        <DeleteButton
-                            label="Delete"
-                            onDelete={() => handleDeleteClick(category._id)} />
+                          onClick={() => {
+                              setEditCategory(category);
+                              setCategoryName(category.name);
+                          }}
+                          className='text-gray-500 max-w-max cursor-pointer'
+                          >
+                              Edit
+                          </button>
+                          <DeleteButton
+                              label="Delete"
+                              onDelete={() => handleDeleteClick(category._id)} 
+                              />
+                      </div>
                     </div>
                 ))}
             </div>
