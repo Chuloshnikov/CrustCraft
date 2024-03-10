@@ -88,6 +88,10 @@ export default function CategoriesPage() {
         className="mt-8 max-w-lg mx-auto"
         >
             <UserTabs isAdmin={true}/>
+            <h1
+                className='text-center text-primary text-4xl mt-4 mb-4 font-medium'>
+                    Categories
+                </h1>
             <form
             onSubmit={handleCategorySubmit}
             className="mt-8"
