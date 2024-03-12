@@ -137,6 +137,7 @@ export default function CategoriesPage() {
                 <h2 className='mt-8 text-sm text-gray-500'>Edit category:</h2>
                 {categories?.length > 0 && categories.map(category => (
                     <div
+                    key={category._id}
                     className='bg-gray-200 rounded-xl py-2 px-4 flex justify-between gap-1 mb-1 items-center'
                     >
                       <span className='w-[50%] text-lg font-semibold text-gray-500'>{category.name}</span>

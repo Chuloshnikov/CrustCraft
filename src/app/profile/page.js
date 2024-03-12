@@ -87,12 +87,12 @@ export default function ProfilePage() {
         <section className="mt-8">
                 <UserTabs isAdmin={isAdmin}/>
                 <h1
-                className='text-center text-primary text-4xl mt-4 mb-4 font-medium'>
+                className='text-center text-primary text-4xl mb-4 font-medium'>
                     Profile
                 </h1>
                 <form 
                 onSubmit={handleProfileInfoUpdate}
-                className="max-w-xl mx-auto"
+                className="max-w-2xl mx-auto"
                 >
                     <div
                     className="flex gap-4"
