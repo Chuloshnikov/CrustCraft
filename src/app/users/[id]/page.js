@@ -6,10 +6,10 @@ import EditableImage from "../../../components/layout/EditableImage";
 import { redirect, useParams } from 'next/navigation';
 import { HiOutlineArrowCircleLeft } from "react-icons/hi";
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 export default function EditUserPage() {
     const {id} = useParams();
-    const {loading, data} = useProfile();
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [image, setImage] = useState('');
@@ -18,6 +18,9 @@ export default function EditUserPage() {
     const [postalCode, setPostalCode] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
+
+    const [redirectToUsers, setRedirectToUsers] = useState(false);
+    const {loading, data} = useProfile();
     
 
     useEffect(() => {
@@ -36,10 +39,21 @@ export default function EditUserPage() {
             });
     }, [id]);
 
-    const handleUserInfoUpdate = async (e, data) => {
+    const handleUserInfoUpdate = async (e) => {
         e.preventDefault();
         const savingPromise = new Promise( async (resolve, reject) => {
-            const response = await fetch('/api/profile', {
+            const data = {
+                _id: id,
+                name: userName,
+                email,
+                image,
+                phone,
+                streetAddress,
+                postalCode,
+                city,
+                country
+            };
+            const response = await fetch('/api/users', {
                 method: 'PUT',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify(data),
@@ -50,6 +64,18 @@ export default function EditUserPage() {
                 reject();
             }
         });
+
+        await toast.promise(savingPromise, {
+            loading: 'Updating this user',
+            success: 'Updated!',
+            error: 'Error',
+        });
+
+        setRedirectToUsers(true);
+    }
+
+    if (redirectToUsers) {
+        return redirect('/users');
     }
 
     if (loading) {
@@ -103,7 +129,7 @@ export default function EditUserPage() {
                             <label>Email</label>
                             <input 
                             type="email" 
-                            disabled={true} 
+                            disabled={true}
                             value={email}
                             />
                             <label>Phone number</label>
