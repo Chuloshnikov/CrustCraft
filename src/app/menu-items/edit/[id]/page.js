@@ -115,7 +115,7 @@ export default function EditMenuItemPage() {
             Edit item
         </h1>
         <div
-        className='max-w-md mx-auto mt-8'
+        className='max-w-xl mx-auto mt-8'
         >
             <Link 
             className='button items-center justify-between'
@@ -178,14 +178,14 @@ export default function EditMenuItemPage() {
                 </div>
             </div>
         </form>
-        <div
-        className='max-w-md mx-auto mt-2'
-        >
-            <DeleteButton 
-            label="Delete this menu item"
-            onDelete={handleDeleteClick}
-            />
-        </div>
+            <div
+            className='max-w-xl mx-auto mt-2'
+            >
+                <DeleteButton 
+                label="Delete this menu item"
+                onDelete={handleDeleteClick}
+                />
+            </div>
     </section>
     )
 }

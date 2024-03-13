@@ -88,7 +88,7 @@ export default function NewMenuItemPage() {
         </div>
         <form
         onSubmit={handleFormSubmit} 
-        className='mt-8 max-w-md mx-auto'
+        className='mt-8 max-w-xl mx-auto'
         >
             <div className='flex items-start gap-4'>
                 <div>
