@@ -4,6 +4,8 @@ import UserTabs from '../../../components/layout/UserTabs';
 import {useProfile} from '../../../components/UseProfile';
 import EditableImage from "../../../components/layout/EditableImage";
 import { redirect, useParams } from 'next/navigation';
+import { HiOutlineArrowCircleLeft } from "react-icons/hi";
+import Link from 'next/link';
 
 export default function EditUserPage() {
     const {id} = useParams();
@@ -60,6 +62,21 @@ export default function EditUserPage() {
     return (
         <section className="mt-8 mx-auto max-w-2xl">
             <UserTabs isAdmin={true}/>
+            <h1
+            className='text-center text-primary text-4xl mt-4 mb-4 font-medium'>
+                Edit item
+            </h1>
+            <div
+            className='max-w-md mx-auto mt-8'
+            >
+                <Link 
+                className='button items-center justify-between'
+                href={'/users'}
+                >
+                    <span>Show all users</span>
+                    <HiOutlineArrowCircleLeft className='w-5 h-5'/>
+                </Link>
+            </div>
             <div className='mt-8'>
                 <form 
                 onSubmit={handleUserInfoUpdate}
