@@ -18,9 +18,12 @@ export default function EditUserPage() {
     const [postalCode, setPostalCode] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
+    const [admin, setAdmin] = useState(false);
+    
 
     const [redirectToUsers, setRedirectToUsers] = useState(false);
     const {loading, data} = useProfile();
+    const {data: loggedInUserData} = useProfile();
     
 
     useEffect(() => {
@@ -35,6 +38,7 @@ export default function EditUserPage() {
                     setPostalCode(user.postalCode);
                     setCity(user.city);
                     setCountry(user.country);
+                    setAdmin(user.admin);
                 });
             });
     }, [id]);
@@ -51,7 +55,8 @@ export default function EditUserPage() {
                 streetAddress,
                 postalCode,
                 city,
-                country
+                country,
+                admin
             };
             const response = await fetch('/api/users', {
                 method: 'PUT',
@@ -176,6 +181,22 @@ export default function EditUserPage() {
                             placeholder="Country"
                             value={country}
                             />
+                            {loggedInUserData.admin && (
+                                <div>
+                                {JSON.stringify(admin)}
+                                <label className='p-2 flex items-center gap-2 border rounded-xl border-gray-300 bg-gray-200 mb-2' htmlFor='adminCheckbox'>
+                                    <input 
+                                    onClick={e => setAdmin(e.target.checked)}
+                                    checked={admin} 
+                                    value={'1'} 
+                                    id="adminCheckbox" 
+                                    type='checkbox' 
+                                    className='mr-2'
+                                    />
+                                    <span>Admin</span>
+                                </label>
+                            </div>
+                            )}
                             <button type="submit">Save</button>
                         </div>
                     </div>
