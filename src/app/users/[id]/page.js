@@ -86,14 +86,14 @@ export default function EditUserPage() {
         return "Not an admin";
     }
     return (
-        <section className="mt-8 mx-auto max-w-2xl">
+        <section className="mt-8 mx-auto max-w-xl">
             <UserTabs isAdmin={true}/>
             <h1
             className='text-center text-primary text-4xl mt-4 mb-4 font-medium'>
                 Edit item
             </h1>
             <div
-            className='max-w-md mx-auto mt-8'
+            className='max-w-xl mx-auto mt-8'
             >
                 <Link 
                 className='button items-center justify-between'
@@ -128,8 +128,9 @@ export default function EditUserPage() {
                             />
                             <label>Email</label>
                             <input 
+                            onChange={e => setEmail(e.target.value)}
                             type="email" 
-                            disabled={true}
+                            placeholder='Email'
                             value={email}
                             />
                             <label>Phone number</label>

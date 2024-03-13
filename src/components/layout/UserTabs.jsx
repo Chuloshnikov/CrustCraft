@@ -39,7 +39,7 @@ const UserTabs = ({ isAdmin }) => {
                     href={'/orders'}
                     className={path === '/orders' ? 'active' : ''}
                     >
-                        Users
+                        Orders
                     </Link>
                 </>
             )}
