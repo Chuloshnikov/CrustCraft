@@ -12,7 +12,7 @@ input[type="email"],
 input[type="password"],
 input[type="tel"],
 input[type="text"] {
-  @apply block w-full mb-2 rounded-xl;
+  @apply block w-full mb-2 rounded-xl focus:ring-primary dark:focus:ring-gray-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 focus:border-white ring-offset-0;
   @apply border p-2 border-gray-300 bg-gray-200;
 }
 
