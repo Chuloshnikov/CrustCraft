@@ -183,7 +183,6 @@ export default function EditUserPage() {
                             />
                             {loggedInUserData.admin && (
                                 <div>
-                                {JSON.stringify(admin)}
                                 <label className='p-2 flex items-center gap-2 border rounded-xl border-gray-300 bg-gray-200 mb-2' htmlFor='adminCheckbox'>
                                     <input 
                                     onClick={e => setAdmin(e.target.checked)}
@@ -191,9 +190,11 @@ export default function EditUserPage() {
                                     value={'1'} 
                                     id="adminCheckbox" 
                                     type='checkbox' 
-                                    className='mr-2'
+                                    className=' text-primary bg-gray-100 border-gray-300
+                                    rounded focus:ring-primary dark:focus:ring-primary 
+                                  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                                     />
-                                    <span>Admin</span>
+                                    <span className='text-base text-gray-900'>Admin</span>
                                 </label>
                             </div>
                             )}
