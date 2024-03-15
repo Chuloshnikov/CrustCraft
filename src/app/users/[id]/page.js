@@ -95,7 +95,7 @@ export default function EditUserPage() {
             <UserTabs isAdmin={true}/>
             <h1
             className='text-center text-primary text-4xl mt-4 mb-4 font-medium'>
-                Edit item
+                Edit user
             </h1>
             <div
             className='max-w-xl mx-auto mt-8'
