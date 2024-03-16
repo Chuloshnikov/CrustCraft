@@ -7,7 +7,7 @@ const MenuItem = ({image, name, description, basePrice, sizes, extraIngredientPr
     className='bg-white p-4 rounded-lg text-center hover:shadow-lg hover:shadow-black/25 duration-200'
     >
         <div
-        className='flex justify-center items-center h-[150px] w-[200px] mx-auto'
+        className='flex justify-center items-center h-[200px] w-[200px] mx-auto'
         >
             <Image className='overflow-hidden' src={image} width={200} height={200} alt="menu-item"/>
         </div>

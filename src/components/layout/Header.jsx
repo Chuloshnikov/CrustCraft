@@ -45,19 +45,19 @@ const Header = () => {
             </Link>
             <Link
             className='hidden lg:block'  
-            href={'/'}
+            href={'/menu'}
             >
                 Menu
             </Link>
             <Link 
             className='hidden lg:block'  
-            href={'/'}
+            href={'/#about'}
             >
                 About
             </Link>
             <Link 
             className='hidden lg:block' 
-            href={'/'}
+            href={'/#contact'}
             >
                 Contact
             </Link>
