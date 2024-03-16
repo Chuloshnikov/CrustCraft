@@ -129,8 +129,8 @@ export default function NewMenuItemPage() {
                     />
                     <MenuItemPriceProps 
                     name={'Extra ingredients'}
-                    priceLabel={'Name'}
-                    titleLabel={'Price'}
+                    priceLabel={'Price'}
+                    titleLabel={'Name'}
                     addLabel={'Add ingredients prices'}
                     props={extraIngredientPrices}
                     setProps={setExtraIngredientPrices}
