@@ -1,29 +1,30 @@
 import React from 'react'
+import Image from 'next/image'
 
-const MenuItem = () => {
+const MenuItem = ({image, name, description, basePrice, sizes, extraIngredientPrices}) => {
   return (
     <div
-    className='bg-gray-200 p-4 rounded-lg text-center hover:bg-white hover:shadow-md hover:shadow-black/25 duration-200'
+    className='bg-white p-4 rounded-lg text-center hover:shadow-lg hover:shadow-black/25 duration-200'
     >
         <div
-        className='flex justify-center items-center'
+        className='flex justify-center items-center h-[150px] w-[200px] mx-auto'
         >
-            <img src='/pizza.png' alt="pizza"/>
+            <Image className='overflow-hidden' src={image} width={200} height={200} alt="menu-item"/>
         </div>
       <h4
       className='font-semibold my-3'
       >
-        Pepperoni Pizza
+        {name}
       </h4>
       <p
-      className='text-gray-500 text-sm'
+      className='text-gray-500 text-sm max-h-16 overflow-y-clip overflow-ellipsis'
       >
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, possimus. 
+        {description.slice(0, 80)} 
       </p>
       <button
       className='bg-primary text-white rounded-full px-8 py-2 mt-4'
       >
-        Add to cart $12
+        Add to cart ${basePrice}
       </button>
     </div>
   )
