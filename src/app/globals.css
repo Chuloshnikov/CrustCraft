@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 section.hero{
-  @apply block md:grid;
+  @apply block mdl:grid;
   grid-template-columns: .4fr .6fr;
 }
 
