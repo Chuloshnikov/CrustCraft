@@ -1,12 +1,15 @@
 "use client"
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import Link from "next/link";
 import { signOut, useSession } from 'next-auth/react';
 import { FaHamburger } from "react-icons/fa";
-import BurgerMenu from "./BurderMenu"
+import { IoMdBasket } from "react-icons/io";
+import BurgerMenu from "./BurderMenu";
+import {CartContext} from "@/components/AppContext";
 
 const Header = () => {
     const [openBurgerMenu, setOpenBurgerMenu] = useState(false);
+    const {cartProducts} = useContext(CartContext);
     const session = useSession();
     const status = session?.status;
     const userData = session.data?.user;
@@ -110,6 +113,20 @@ const Header = () => {
                     Register
                 </Link>
             </>
+            )}
+            {cartProducts?.length > 0 && (
+                <Link 
+                href={'/cart'}
+                className='p-2 bg-primary text-white rounded-full relative'
+                >
+                    <IoMdBasket className='w-6 h-6'/>
+                    <span 
+                    className='bg-white text-primary rounded-full border border-primary
+                    -top-1 -right-1 absolute py-[2px] px-2 text-sm'
+                    >
+                        {cartProducts.length}
+                    </span>
+                </Link>
             )}
             <div
             className='max-w-max bg-primary text-white p-3 rounded-full -ml-6 lg:hidden cursor-pointer'
