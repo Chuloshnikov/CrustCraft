@@ -85,7 +85,7 @@ const Header = () => {
                 </Link>
                     <button
                         onClick={() => signOut()}
-                        className="bg-primary border-0 text-white px-4 mdl:px-8 py-2 rounded-full"
+                        className="bg-primary border-0 text-white px-4 mdl:px-8 py-2 rounded-full xs:hidden md:block"
                         >
                         Logout
                     </button>
@@ -97,7 +97,7 @@ const Header = () => {
                     <Link href={'/login'}>Login</Link>
                     <Link 
                     href={'/register'}
-                    className="bg-primary text-white px-8 py-2 rounded-full"
+                    className="bg-primary text-white px-4 mdl:px-8 py-2 rounded-full"
                     >
                         Register
                     </Link>
@@ -108,7 +108,7 @@ const Header = () => {
                 <Link href={'/login'}>Login</Link>
                 <Link 
                 href={'/register'}
-                className="bg-primary text-white px-8 py-2 rounded-full"
+                className="bg-primary text-white px-4 mdl:px-8 py-2 rounded-full"
                 >
                     Register
                 </Link>
@@ -117,7 +117,7 @@ const Header = () => {
             {cartProducts?.length > 0 && (
                 <Link 
                 href={'/cart'}
-                className='p-2 bg-primary text-white rounded-full relative'
+                className='p-2 bg-primary text-white rounded-full relative -ml-6'
                 >
                     <IoMdBasket className='w-6 h-6'/>
                     <span 
