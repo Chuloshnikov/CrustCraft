@@ -121,8 +121,8 @@ const Header = () => {
                 >
                     <IoMdBasket className='w-6 h-6'/>
                     <span 
-                    className='bg-white text-primary rounded-full border border-primary
-                    -top-1 -right-1 absolute py-[2px] px-2 text-sm'
+                    className='bg-white text-primary rounded-full border-2 border-primary
+                    -top-1 -right-1 absolute py-[2px] px-2 text-sm shadow-lg'
                     >
                         {cartProducts.length}
                     </span>
