@@ -42,7 +42,7 @@ const HomeMenu = () => {
       className='grid grid-cols-1 mdl:grid-cols-3 gap-4 mt-4'
       >
         {bestSellers?.length > 0 && bestSellers.map(item => (
-          <MenuItem {...item}/>
+          <MenuItem key={item._id} {...item}/>
         ))}
       </div>
     </section>
