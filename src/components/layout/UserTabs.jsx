@@ -8,7 +8,7 @@ const UserTabs = ({ isAdmin }) => {
 
     return (
         <div
-        className="flex gap-2 justify-center tabs"
+        className="flex flex-col md:flex-row gap-2 justify-center tabs"
         >
             <Link 
             href={'/profile'} 
