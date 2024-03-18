@@ -1,5 +1,6 @@
-import { useContext } from 'react'
-import Image from 'next/image'
+import { useContext } from 'react';
+import Image from 'next/image';
+import {CartContext} from "@/components/AppContext";
 
 const MenuItem = ({image, name, description, basePrice, sizes, extraIngredientPrices}) => {
 
