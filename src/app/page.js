@@ -15,7 +15,6 @@ export default function Home() {
     >
       <SectionHeaders subHeader={'Our story'} mainHeader={'About us'}/>
       <div
-      id="about"
       className="text-gray-500 text-md font-medium max-w-md mx-auto mt-4 flex flex-col gap-4"
       >
         <p>
@@ -65,7 +64,7 @@ export default function Home() {
       className="text-4xl underline text-gray-500" 
       href="tel:+985632567771"
       >
-        +98 777 777 77 77
+        +77 787 78 78 77
       </a>
     </section>
   </>
