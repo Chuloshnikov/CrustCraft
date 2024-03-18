@@ -6,7 +6,7 @@ import { signOut } from 'next-auth/react';
 const BurderMenu = ({ menuClose }) => {
   return (
     <nav
-    className="z-50 absolute top-1 right-0 bg-white flex flex-col gap-4 px-6 py-4 w-full h-screen border-b-primary overflow-clip font-semibold"
+    className="z-50 fixed inset-0  bg-white flex flex-col gap-4 px-6 py-4 border-b-primary overflow-clip font-semibold"
     >
         <div className="w-full flex justify-end items-end">
             <IoIosCloseCircle 
