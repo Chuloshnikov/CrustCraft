@@ -1,9 +1,12 @@
 "use client"
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from "next/link";
 import { signOut, useSession } from 'next-auth/react';
+import { FaHamburger } from "react-icons/fa";
+import BurgerMenu from "./BurderMenu"
 
 const Header = () => {
+    const [openBurgerMenu, setOpenBurgerMenu] = useState(false);
     const session = useSession();
     const status = session?.status;
     const userData = session.data?.user;
@@ -27,6 +30,10 @@ const Header = () => {
       });
       }
     },[gmailCredentials]);
+
+    const handleMenuToggle = () => {
+        setOpenBurgerMenu(!openBurgerMenu);
+    }
   return (
     <header className="flex items-center justify-between">
         
@@ -61,7 +68,6 @@ const Header = () => {
             >
                 Contact
             </Link>
-            
         </nav>
         <nav
         className='flex items-center gap-8 text gray-500 font-semibold'
@@ -76,7 +82,7 @@ const Header = () => {
                 </Link>
                     <button
                         onClick={() => signOut()}
-                        className="bg-primary border-0 text-white px-8 py-2 rounded-full"
+                        className="bg-primary border-0 text-white px-4 mdl:px-8 py-2 rounded-full"
                         >
                         Logout
                     </button>
@@ -105,8 +111,14 @@ const Header = () => {
                 </Link>
             </>
             )}
-           
+            <div
+            className='max-w-max bg-primary text-white p-3 rounded-full -ml-6 lg:hidden cursor-pointer'
+            onClick={handleMenuToggle}
+            >
+                <FaHamburger/>
+            </div>
         </nav>
+        {openBurgerMenu && <BurgerMenu menuClose={handleMenuToggle}/>}
  </header>
   )
 }
