@@ -1,7 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
 import Image from 'next/image'
 
 const MenuItem = ({image, name, description, basePrice, sizes, extraIngredientPrices}) => {
+
+  const {addToCart} = useContext(CartContext);
+
   return (
     <div
     className='bg-white p-4 rounded-lg text-center hover:shadow-lg hover:shadow-black/25 duration-200'
@@ -22,6 +25,7 @@ const MenuItem = ({image, name, description, basePrice, sizes, extraIngredientPr
         {description.slice(0, 80)} 
       </p>
       <button
+      onClick={() => addToCart({image, name, description, basePrice, sizes, extraIngredientPrices})}
       className='bg-primary text-white rounded-full px-8 py-2 mt-4'
       >
         Add to cart ${basePrice}
