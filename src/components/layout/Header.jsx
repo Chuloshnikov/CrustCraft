@@ -73,7 +73,7 @@ const Header = () => {
             </Link>
         </nav>
         <nav
-        className='flex items-center gap-8 text gray-500 font-semibold'
+        className='flex items-center xs:gap-6 sm:gap-8 text gray-500 font-semibold'
         >
             {status === 'authenticated' && (
                 <>
@@ -85,7 +85,7 @@ const Header = () => {
                 </Link>
                     <button
                         onClick={() => signOut()}
-                        className="bg-primary border-0 text-white px-4 mdl:px-8 py-2 rounded-full xs:hidden md:block"
+                        className="bg-primary border-0 text-white px-2 mdl:px-8 py-2 rounded-full"
                         >
                         Logout
                     </button>
@@ -122,7 +122,7 @@ const Header = () => {
                     <IoMdBasket className='w-6 h-6'/>
                     <span 
                     className='bg-white text-primary rounded-full border-2 border-primary
-                    -top-1 -right-1 absolute py-[2px] px-2 text-sm shadow-lg'
+                    -top-1 -right-3 absolute py-[2px] px-2 text-sm shadow-lg'
                     >
                         {cartProducts.length}
                     </span>
