@@ -10,6 +10,8 @@ const MenuItem = (menuItem) => {
     sizes, extraIngredientPrices,
   } = menuItem;
 
+  const [selectedSize, setSelectedSize] = useState(sizes?.[0] || null);
+  const [selectedExtras, setSelectedExtras] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const {addToCart} = useContext(CartContext);
 
@@ -19,6 +21,31 @@ const MenuItem = (menuItem) => {
       toast.success('Added to cart');
     } else {
       setShowPopup(true);
+    }
+  }
+
+
+  const handleExtraClick = (e, extra) => {
+    const checked = e.target.checked;
+
+    if (checked) {
+      setSelectedExtras(prev => [...prev, extra]);
+    } else {
+      setSelectedExtras(prev => {
+        return prev.filter(e => e.name !== extra.name);
+      })
+    }
+  }
+
+
+  let selectedPrice = basePrice;
+  if (selectedSize) {
+    selectedPrice += selectedSize.price
+  }
+
+  if (selectedExtras?.length > 0) {
+    for (const extra of selectedExtras) {
+      selectedPrice += extra.price;
     }
   }
 
@@ -44,7 +71,9 @@ const MenuItem = (menuItem) => {
                     {sizes?.map((size, index) => (
                         <label key={index} className='py-1 border flex gap-2'>
                             <input 
-                            className='focus:ring-primary text-white focus:text-primary dark:focus:ring-gray-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 focus:border-white ring-offset-0'
+                            onClick={() => setSelectedSize(size)}
+                            checked={selectedSize?.name === size.name}
+                            className='focus:ring-primary text-primary focus:text-primary dark:focus:ring-gray-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 focus:border-white ring-offset-0'
                             type="radio"
                             /> 
                             <span>{size.name}</span> 
@@ -56,11 +85,12 @@ const MenuItem = (menuItem) => {
               )}
               {sizes?.length > 0 && (
               <div className='bg-gray-200 rounded-md p-2 mt-2'>
-                  <h3 className='text-center text-gray-500'>Pick your extra</h3>
+                  <h3 className='text-center text-gray-500'>Any extras?</h3>
                   <div className='py-2'>
                     {extraIngredientPrices?.map((extra, index) => (
                         <label key={index} className='py-1 border flex gap-2'>
                             <input 
+                            onClick={e => handleExtraClick(e, extra)}
                             className='focus:ring-primary text-primary focus:text-primary dark:focus:ring-gray-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 focus:border-white ring-offset-0'
                             type="checkbox"
                             name={extra.name}
@@ -72,7 +102,7 @@ const MenuItem = (menuItem) => {
                   </div>
                 </div>  
                 )}
-                <button className='mt-2 bg-primary text-white' type="button">Add to cart "selected price"</button>
+                <button className='primary sticky bottom-2' type="button">Add to cart ${selectedPrice}</button>
           </div>
         </div>
       </div>
