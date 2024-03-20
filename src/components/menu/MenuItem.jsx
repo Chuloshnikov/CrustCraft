@@ -52,8 +52,13 @@ const MenuItem = (menuItem) => {
   return (
     <>
     {showPopup && (
-      <div className='fixed inset-0 bg-black/80 flex items-center justify-center'>
-        <div className='bg-white p-2 rounded-lg max-w-md '>
+      <div 
+      onClick={() => setShowPopup(false)}
+      className='fixed inset-0 bg-black/80 flex items-center justify-center'
+      >
+        <div
+        onClick={e => e.stopPropagation()}
+         className='bg-white p-2 rounded-lg max-w-md'>
           <div className='overflow-y-scroll p-2' style={{maxHeight: 'calc(100vh - 100px'}}>
               <Image 
               src={image} 
@@ -102,7 +107,19 @@ const MenuItem = (menuItem) => {
                   </div>
                 </div>  
                 )}
-                <button className='primary sticky bottom-2' type="button">Add to cart ${selectedPrice}</button>
+                <button 
+                onClick={handleAddToCartButtonClick}
+                className='primary sticky bottom-2' 
+                type="button"
+                >
+                  Add to cart ${selectedPrice}
+                </button>
+                <button 
+                className='mt-2'
+                onClick={() => setShowPopup(false)}
+                >
+                  Cancel
+                </button>
           </div>
         </div>
       </div>
