@@ -1,8 +1,11 @@
 import Image from 'next/image';
+import AddToCartButton from "@/components/menu/AddToCartButton";
 
 const MenuItemBox = ({onAddToCart, ...item}) => {
-  const {image, description, name, basePrice} = item;
+  const {image, description, name, basePrice, sizes, extraIngredientPrices,} = item;
 
+  const hasSizesOrExtras = sizes?.length > 0 || extraIngredientPrices?.length > 0;
+  
   return (
     <div
       className='bg-white p-4 rounded-lg text-center hover:shadow-lg hover:shadow-black/25 duration-200'
@@ -22,12 +25,12 @@ const MenuItemBox = ({onAddToCart, ...item}) => {
         >
           {description.slice(0, 80)} 
         </p>
-        <button
+        <AddToCartButton
+        image={image}
+        hasSizesOrExtras={hasSizesOrExtras}
         onClick={onAddToCart}
-        className='bg-primary text-white rounded-full px-8 py-2 mt-4'
-        >
-          Add to cart ${basePrice}
-        </button>
+        basePrice={basePrice}
+      />
     </div>
   )
 }

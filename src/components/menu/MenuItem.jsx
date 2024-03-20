@@ -15,13 +15,17 @@ const MenuItem = (menuItem) => {
   const [showPopup, setShowPopup] = useState(false);
   const {addToCart} = useContext(CartContext);
 
-  function handleAddToCartButtonClick() {
-    if (sizes.length === 0 && extraIngredientPrices.length === 0) {
-      addToCart({image, name, description, basePrice, sizes, extraIngredientPrices});
-      toast.success('Added to cart');
-    } else {
+  async function handleAddToCartButtonClick() {
+    console.log('add to cart');
+    const hasOptions = sizes.length > 0 || extraIngredientPrices.length > 0;
+    if (hasOptions && !showPopup) {
       setShowPopup(true);
+      return;
     }
+    addToCart(menuItem, selectedSize, selectedExtras);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log('hiding popup');
+    setShowPopup(false);
   }
 
 
