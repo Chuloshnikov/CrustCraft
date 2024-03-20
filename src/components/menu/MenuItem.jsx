@@ -38,7 +38,7 @@ const MenuItem = (menuItem) => {
           <p className='text-center text-gray-600 text-sm mb-2'>{description}</p>
           {sizes?.length > 0 && (
             <div className='bg-gray-200 rounded-md p-2'>
-              <h3>Pick your size</h3>
+              <h3 className='text-center trxt-gray-500'>Pick your size</h3>
               <div className='p-2'>
                 {sizes?.map((size, index) => (
                     <label key={index} className='py-1 border flex gap-2'>
