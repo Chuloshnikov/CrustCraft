@@ -1,5 +1,5 @@
 "use client"
-import { CartContext } from "@/components/AppContext";
+import { CartContext, cartProductPrice } from "@/components/AppContext";
 import SectionHeaders from "@/components/layout/SectionHeaders";
 import { useContext } from "react";
 import { IoTrashOutline } from "react-icons/io5";
@@ -7,7 +7,12 @@ import Image from "next/image";
 
 export default function CartPage() {
 
-    const {cartProducts} = useContext(CartContext);
+    const { cartProducts, removeCartProduct } = useContext(CartContext);
+
+    let subTotal = 0;
+    for (const product of cartProducts) {
+        subTotal += cartProductPrice(product);
+    }
 
     return (
         <section className="mt-8">
@@ -44,13 +49,21 @@ export default function CartPage() {
                                 )}
                             </div>
                             <div className="text-xl font-semibold">
-                                $12
+                                ${cartProductPrice(product)}
                             </div>
                             <div>
-                                <button className="p-1 rounded-md bg-primary text-white border-none"><IoTrashOutline className="w-6 h-6"/></button>
+                                <button
+                                onClick={() => removeCartProduct(index)} 
+                                className="p-1 rounded-md bg-primary text-white border-none"
+                                >
+                                    <IoTrashOutline className="w-6 h-6"/>
+                                </button>
                             </div>
                         </div>
                     ))}
+                    <div>
+                        Total: ${subTotal}
+                    </div>
                 </div>
                 <div>
                     right
