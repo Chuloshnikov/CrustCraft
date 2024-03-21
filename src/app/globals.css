@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: beige;
+}
 
 section.hero{
   @apply block mdl:grid;
