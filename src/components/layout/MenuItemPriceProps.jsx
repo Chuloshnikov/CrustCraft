@@ -100,4 +100,4 @@ const MenuItemPriceProps = ({name, titleLabel, priceLabel, addLabel, props, setP
   )
 }
 
-export default MenuItemPriceProps
+export default MenuItemPriceProps;

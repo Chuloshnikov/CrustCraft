@@ -25,6 +25,7 @@ const MenuItem = (menuItem) => {
     addToCart(menuItem, selectedSize, selectedExtras);
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('hiding popup');
+    toast.success('Added to cart!');
     setShowPopup(false);
   }
 
