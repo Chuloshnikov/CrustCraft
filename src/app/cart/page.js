@@ -59,7 +59,7 @@ export default function CartPage() {
                         className="flex gap-4 mb-4 items-center gap-4 mb-4 border-b py-2"
                         >
                             <div className="w-20">
-                                <Image width={240} height={240} src={product.image} alt={"product image"}/>
+                                <Image className="rounded-xl" width={240} height={240} src={product.image} alt={"product image"}/>
                             </div>
                             <div className="text-gray-700 grow">
                                 <h3 className="text-lg font-semibold ">

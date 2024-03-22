@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image';
 import MenuItem from '../menu/MenuItem';
 import SectionHeaders from './SectionHeaders';
+import Skeleton from '@mui/material/Skeleton';
 
 const HomeMenu = () => {
   const [bestSellers, setBestSellers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch('/api/menu-items').then(res => {
@@ -45,6 +47,25 @@ const HomeMenu = () => {
           <MenuItem key={item._id} {...item}/>
         ))}
       </div>
+      {!bestSellers?.length && (
+          <div className='grid grid-cols-1 mdl:grid-cols-3 gap-4 mt-4'>
+            <div className='max-w-[360px] h-[380px] flex flex-col items-center justify-center bg-white rounded-lg'>
+              <Skeleton  width={200} height={250}/>
+              <Skeleton  width={200} height={20}/>
+              <Skeleton  width={200} height={20}/>
+            </div>
+            <div className='max-w-[360px] h-[380px] flex flex-col items-center justify-center bg-white rounded-lg'>
+              <Skeleton  width={200} height={250}/>
+              <Skeleton  width={200} height={20}/>
+              <Skeleton  width={200} height={20}/>
+            </div>
+            <div className='max-w-[360px] h-[380px] flex flex-col items-center justify-center bg-white rounded-lg'>
+              <Skeleton  width={200} height={250}/>
+              <Skeleton  width={200} height={20}/>
+              <Skeleton  width={200} height={20}/>
+            </div>
+          </div>
+        )}
     </section>
   )
 }
