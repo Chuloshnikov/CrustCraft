@@ -4,7 +4,6 @@ const SectionHeaders = ({ subHeader, mainHeader }) => {
   return (
     <>
         <h3
-        id="about"
         className='uppercase text-gray-600 font-semibold leading-4'
         >
           {subHeader}

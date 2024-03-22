@@ -23,7 +23,7 @@ const HomeMenu = () => {
       className='absolute h-120 left-0 right-0 w-full justify-start'
       >
         <div
-        className='absolute -top-[70px] rotate-45 -z-10'
+        className='xs:hidden md:block absolute -top-[70px] rotate-45 -z-10'
         >
           <Image src={'/hamburger.svg'} width={200} height={200} alt={'sallad'}/>
         </div>
