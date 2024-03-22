@@ -89,9 +89,11 @@ export default function CartPage() {
                             </div>
                         </div>
                     ))}
-                    <div className="my-4 text-right mr-12 px-4 py-2 rounded-lg bg-white">
-                        <span className="text-gray-500">Subtotal:</span>
-                        <span className="text-lg font-semibold pl-2">${subTotal}</span>
+                    <div className="my-4 flex justify-end mr-3 px-4 py-2">
+                        <div className="py-2 px-4 rounded-xl bg-primary text-white max-w-max">
+                            <span className="text-white text-xl">Subtotal:</span>
+                            <span className="text-xl font-semibold pl-2">${subTotal}</span>
+                        </div>
                     </div>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
@@ -140,7 +142,7 @@ export default function CartPage() {
                             placeholder="Country"
                             value={country}
                             />
-                        <button type="submit">Pay $29</button>
+                        <button type="submit">Pay ${subTotal}</button>
                     </form>
                 </div>
             </div>
