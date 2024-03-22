@@ -48,7 +48,7 @@ export default function CartPage() {
                 <SectionHeaders mainHeader="Cart"/>
             </div>
             
-            <div className="mt-4 grid gap-4 grid-cols-2">
+            <div className="mt-4 grid gap-4 xs:grid-cols-1 md:grid-cols-2">
                 <div>
                     {cartProducts?.length === 0 && (
                         <div>No products in your shopping cart</div>
