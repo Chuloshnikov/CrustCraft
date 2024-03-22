@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { HiOutlineArrowCircleRight } from "react-icons/hi";
+import Link from 'next/link';
 
 const Hero = () => {
   return (
