@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { IoIosCloseCircle } from "react-icons/io";
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 
 const BurderMenu = ({ menuClose }) => {
+    const session = useSession();
+    const status = session?.status;
+
   return (
     <nav
     className="z-50 fixed inset-0  bg-white flex flex-col gap-4 px-6 py-4 border-b-primary overflow-clip font-semibold"
@@ -34,11 +37,13 @@ const BurderMenu = ({ menuClose }) => {
             >
                 Contact
             </Link>
-            <span
-            onClick={() => signOut()}
-            >
-                Log out
-            </span>
+            {status === 'authenticated' && (
+                <span
+                onClick={() => signOut()}
+                >
+                    Log out
+                </span>
+            )}
     </nav>
   )
 }
