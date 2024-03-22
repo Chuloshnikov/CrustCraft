@@ -1,8 +1,20 @@
+"use client"
+import React, { useRef, useState, useEffect } from 'react'
 
 
 export default function AddToCartButton({
   hasSizesOrExtras, onClick, basePrice, image
 }) {
+  if (!hasSizesOrExtras) {
+    return (
+      <div className="flying-button-parent mt-4">
+          <button type="button" onClick={onClick}>
+            Add to cart ${basePrice}
+          </button>
+      </div>
+    );
+  }
+
   return (
     <button
       type="button"
