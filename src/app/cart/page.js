@@ -42,6 +42,20 @@ export default function CartPage() {
         subTotal += cartProductPrice(product);
     }
 
+    async function proceedToCheckout(e) {
+        const address = {streetAddress, phone, postalCode, city, country};
+        const response = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                address,
+                cartProducts,
+            }),
+        });
+        const link = await response.json();
+        window.location = link;
+    }
+
     return (
         <section className="mt-8">
             <div className="text-center">
@@ -89,16 +103,28 @@ export default function CartPage() {
                             </div>
                         </div>
                     ))}
-                    <div className="my-4 flex justify-end mr-3 px-4 py-2">
-                        <div className="py-2 px-4 rounded-xl bg-primary text-white max-w-max">
-                            <span className="text-white text-xl">Subtotal:</span>
+                    <div className="mt-4 flex justify-end mr-3 px-2 py-1">
+                        <div className="py-2 px-4 rounded-xl bg-white text-gray-700 max-w-max">
+                            <span className="text-gray-700 text-lg">Subtotal:</span>
                             <span className="text-xl font-semibold pl-2">${subTotal}</span>
+                        </div>
+                    </div>
+                    <div className="-mt-1 flex justify-end mr-3 px-2 py-1">
+                        <div className="py-2 px-4 rounded-xl bg-white text-gray-700 max-w-max">
+                            <span className="text-gray-700 text-lg">Delivery:</span>
+                            <span className="text-xl font-semibold pl-2">$4</span>
+                        </div>
+                    </div>
+                    <div className="-mt-1 flex justify-end mr-1 px-4 py-2">
+                        <div className="py-2 px-4 rounded-xl bg-primary text-white max-w-max">
+                            <span className="text-white text-xl">Total:</span>
+                            <span className="text-xl font-semibold pl-2">${subTotal + 4}</span>
                         </div>
                     </div>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
                     <h2 className="text-lg font-semibold text-gray-700">Checkout</h2>
-                    <form>
+                    <form onSubmit={proceedToCheckout}>
                     <label>Phone number</label>
                             <input 
                             onChange={e => setPhone(e.target.value)}
@@ -142,7 +168,7 @@ export default function CartPage() {
                             placeholder="Country"
                             value={country}
                             />
-                        <button type="submit">Pay ${subTotal}</button>
+                        <button type="submit">Pay ${subTotal + 4}</button>
                     </form>
                 </div>
             </div>
