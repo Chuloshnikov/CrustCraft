@@ -10,7 +10,7 @@ import Image from 'next/image';
 const AboutUs = () => {
   return (
     <div
-    className="-z-10 relative text-gray-500 text-md font-medium max-w-xl mx-auto mt-4 flex flex-col gap-4"
+    className="relative text-gray-500 text-md font-medium max-w-xl mx-auto mt-4 flex flex-col gap-4"
     >
          <Accordion 
          sx={{

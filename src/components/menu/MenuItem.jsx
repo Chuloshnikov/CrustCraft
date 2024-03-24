@@ -59,7 +59,7 @@ const MenuItem = (menuItem) => {
     {showPopup && (
       <div 
       onClick={() => setShowPopup(false)}
-      className='fixed inset-0 bg-black/80 flex items-center justify-center'
+      className='z-10 fixed inset-0 bg-black/80 flex items-center justify-center'
       >
         <div
         onClick={e => e.stopPropagation()}
