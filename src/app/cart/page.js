@@ -83,7 +83,7 @@ export default function CartPage() {
                                 {product.extras?.length > 0 && (
                                     <div>
                                         {product.extras.map(extra => (
-                                        <div className="text-sm text-gray-500">Extra: {extra.name}{" "}${extra.price}</div>
+                                        <div key={extra._id} className="text-sm text-gray-500">Extra: {extra.name}{" "}${extra.price}</div>
                                         ))}
                                     </div>
                                 )}
