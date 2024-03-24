@@ -31,7 +31,8 @@ export async function POST(req) {
         }
         if (cartProduct.extras?.length > 0) {
             for (const cartProductExtra of cartProduct.extras) {
-                const extraInfo = productInfo.extraIngredientPrices.find(extra => extra._id.toString() === extraInfo._id.toString());
+                const productExtras = productInfo.extraIngredientPrices;
+                const extraInfo = productExtras.find(extra => extra._id.toString() === cartProductExtra._id.toString());
                 productPrice += extraInfo.price;
             }
         }
