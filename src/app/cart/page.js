@@ -39,6 +39,8 @@ export default function CartPage() {
     }
 
     async function proceedToCheckout(e) {
+        e.preventDefault();
+        //address and cart to db
         const address = {streetAddress, phone, postalCode, city, country};
         const response = await fetch('/api/checkout', {
             method: 'POST',
