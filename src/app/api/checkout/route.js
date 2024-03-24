@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { Order } from "../../../models/Order";
+import {MenuItem} from "../../../models/MenuItem";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -20,19 +22,23 @@ export async function POST(req) {
 
     const stripeLineItems = [];
     for (const cartProduct of cartProducts) {
-        const productName = cartProduct.name;
+        
         const productInfo = await MenuItem.findById(cartProduct._id)
         let productPrice = productInfo.basePrice;
         if (cartProduct.size) {
-            const size = productInfo.sizes.find(size => size._id === cartProduct.size._id);
+            const size = productInfo.sizes.find(size => size._id.toString() === cartProduct.size._id.toString());
             productPrice += size.price;
         }
         if (cartProduct.extras?.length > 0) {
-            for (const cartProductExtra  of cartProduct.extras) {
-                const extraInfo = productInfo.extraIngredientPrices.find(extra => extra._id === extraThingInfo._id);
+            for (const cartProductExtra of cartProduct.extras) {
+                const extraInfo = productInfo.extraIngredientPrices.find(extra => extra._id.toString() === extraInfo._id.toString());
                 productPrice += extraInfo.price;
             }
         }
+
+        const productName = cartProduct.name;
+
+
         stripeLineItems.push({
             quantity: 1,
             price_data: {
@@ -44,6 +50,12 @@ export async function POST(req) {
             unit_amount: productPrice * 100,
         })
     }
+
+    console.log(stripeLineItems);
+
+    return Response.json(null);
+
+    {/*}
 
     const stripeSession = await stripe.checkout.sessions.create({
         line_items: stripeLineItems,
@@ -63,5 +75,5 @@ export async function POST(req) {
         ],
 
     })
-
+*/}
 }
