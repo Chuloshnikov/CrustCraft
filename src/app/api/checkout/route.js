@@ -22,41 +22,41 @@ export async function POST(req) {
 
     const stripeLineItems = [];
     for (const cartProduct of cartProducts) {
-        
-        const productInfo = await MenuItem.findById(cartProduct._id)
-        let productPrice = productInfo.basePrice;
-        if (cartProduct.size) {
-            const size = productInfo.sizes.find(size => size._id.toString() === cartProduct.size._id.toString());
-            productPrice += size.price;
+  
+      const productInfo = await MenuItem.findById(cartProduct._id);
+  
+      let productPrice = productInfo.basePrice;
+      if (cartProduct.size) {
+        const size = productInfo.sizes
+          .find(size => size._id.toString() === cartProduct.size._id.toString());
+        productPrice += size.price;
+      }
+      if (cartProduct.extras?.length > 0) {
+        for (const cartProductExtra of cartProduct.extras) {
+          const productExtras = productInfo.extraIngredientPrices;
+          const extraInfo = productExtras
+            .find(extra => extra._id.toString() === cartProductExtra._id.toString());
+          productPrice += extraInfo.price;
         }
-        if (cartProduct.extras?.length > 0) {
-            for (const cartProductExtra of cartProduct.extras) {
-                const productExtras = productInfo.extraIngredientPrices;
-                const extraInfo = productExtras.find(extra => extra._id.toString() === cartProductExtra._id.toString());
-                productPrice += extraInfo.price;
-            }
-        }
-
-        const productName = cartProduct.name;
-
-
-        stripeLineItems.push({
-            quantity: 1,
-            price_data: {
-                currency: 'USD',
-                product_data: {
-                    name: productName,
-                }
-            },
-            unit_amount: productPrice * 100,
-        })
+      }
+  
+      const productName = cartProduct.name;
+  
+      stripeLineItems.push({
+        quantity: 1,
+        price_data: {
+          currency: 'USD',
+          product_data: {
+            name: productName,
+          },
+          unit_amount: productPrice * 100,
+        },
+      });
     }
 
     console.log(stripeLineItems);
 
-    return Response.json(null);
 
-    {/*}
 
     const stripeSession = await stripe.checkout.sessions.create({
         line_items: stripeLineItems,
@@ -70,11 +70,11 @@ export async function POST(req) {
                 shipping_rate_data: {
                     display_name: 'Delivery fee',
                     type: 'fixed_amount',
-                    fixed_amount: {amount: 500, currency: 'USD'},
+                    fixed_amount: {amount: 400, currency: 'USD'},
                 },
             }
         ],
-
-    })
-*/}
+    });
+    
+    return Response.json(stripeSession.url);
 }
