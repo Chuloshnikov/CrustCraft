@@ -11,21 +11,17 @@ export default function CartPage() {
     const {status} = session;
 
     const { cartProducts, removeCartProduct } = useContext(CartContext);
-    const [userName, setUserName] = useState('');
-    const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [streetAddress, setStreetAddress] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    console.log(phone);
+    console.log(cartProducts);
 
     useEffect(() => {
         if (status === 'authenticated') {
             fetch('/api/profile').then(response => {
                 response.json().then(data => {
-                    setUserName(session.data.user.name);
-                    setEmail(session.data.user.email);
                     setPhone(data.phone);
                     setStreetAddress(data.streetAddress);
                     setPostalCode(data.postalCode);
@@ -122,7 +118,7 @@ export default function CartPage() {
                         </div>
                     </div>
                 </div>
-                <div className="bg-gray-100 p-4 rounded-lg">
+                <div className="bg-white p-4 rounded-lg">
                     <h2 className="text-lg font-semibold text-gray-700">Checkout</h2>
                     <form onSubmit={proceedToCheckout}>
                     <label>Phone number</label>
