@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image';
 import MenuItem from '../menu/MenuItem';
 import SectionHeaders from './SectionHeaders';
-import Skeleton from '@mui/material/Skeleton';
+import SceletonBox from './SceletonBox';
 
 const HomeMenu = () => {
   const [bestSellers, setBestSellers] = useState([]);
@@ -40,32 +40,14 @@ const HomeMenu = () => {
       >
         <SectionHeaders subHeader={'check out'} mainHeader={'Our Best Sellers'}/>
       </div>
-      <div
-      className='grid grid-cols-1 mdl:grid-cols-3 gap-4 mt-4'
-      >
-        {bestSellers?.length > 0 && bestSellers.map(item => (
-          <MenuItem key={item._id} {...item}/>
-        ))}
-      </div>
-      {!bestSellers?.length && (
-          <div className='grid grid-cols-1 mdl:grid-cols-3 gap-4 mt-4'>
-            <div className='max-w-[360px] h-[380px] flex flex-col items-center bg-white rounded-lg'>
-              <Skeleton  width={200} height={270}/>
-              <Skeleton  width={200} height={20}/>
-              <Skeleton  width={200} height={20}/>
-            </div>
-            <div className='max-w-[360px] h-[380px] flex flex-col items-center bg-white rounded-lg'>
-              <Skeleton  width={200} height={270}/>
-              <Skeleton  width={200} height={20}/>
-              <Skeleton  width={200} height={20}/>
-            </div>
-            <div className='max-w-[360px] h-[380px] flex flex-col items-center bg-white rounded-lg'>
-              <Skeleton  width={200} height={270}/>
-              <Skeleton  width={200} height={20}/>
-              <Skeleton  width={200} height={20}/>
-            </div>
-          </div>
-        )}
+          <div
+          className='grid grid-cols-1 mdl:grid-cols-3 gap-4 mt-4'
+          >
+            {bestSellers?.length > 0 && bestSellers.map(item => (
+              <MenuItem key={item._id} {...item}/>
+            ))}
+            {!bestSellers?.length && <SceletonBox/>}
+        </div>
     </section>
   )
 }

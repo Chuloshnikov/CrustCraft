@@ -2,6 +2,7 @@
 import SectionHeaders from "@/components/layout/SectionHeaders";
 import MenuItem from "../../components/menu/MenuItem";
 import { useState, useEffect} from "react";
+import SceletonBox from "../../components/layout/SceletonBox";
 
 export default function MenuPage() {
     const [categories, setCategories] = useState([]);
@@ -27,8 +28,20 @@ export default function MenuPage() {
                             <MenuItem {...item}/>
                         ))}
                     </div>
+
                 </div>
             ))}
+            {!categories?.length && (
+                <div>
+                    <div className="text-center">
+                        <SectionHeaders mainHeader={"Menu categories"}/>
+                    </div>
+                    <div className="grid grid-cols-1 mdl:grid-cols-3 gap-4 mt-6 mb-12">
+                        <SceletonBox/>
+                        <SceletonBox/>
+                    </div>
+                </div>
+            )}
         </section>
     )
 }
