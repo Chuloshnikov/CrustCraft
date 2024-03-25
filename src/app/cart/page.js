@@ -76,6 +76,15 @@ export default function CartPage() {
         })
     }
 
+    if (cartProducts.length === 0) {
+        return (
+            <section className="mt-8 text-center">
+                <SectionHeaders mainHeader="Cart"/>
+                <p className="mt-4">Your shopping cart is empty</p>
+            </section>
+        );
+    }
+
     return (
         <section className="mt-8">
             <div className="text-center">
@@ -123,19 +132,19 @@ export default function CartPage() {
                             </div>
                         </div>
                     ))}
-                    <div className="mt-4 flex justify-end mr-3 px-2 py-1">
+                    <div className="mt-4 flex justify-end mr-3 px-2 py-1 pr-5">
                         <div className="py-2 px-4 rounded-xl bg-white text-gray-700 max-w-max">
                             <span className="text-gray-700 text-lg">Subtotal:</span>
                             <span className="text-xl font-semibold pl-2">${subTotal}</span>
                         </div>
                     </div>
-                    <div className="-mt-1 flex justify-end mr-3 px-2 py-1">
+                    <div className="-mt-1 flex justify-end mr-3 px-2 py-1 pr-5">
                         <div className="py-2 px-4 rounded-xl bg-white text-gray-700 max-w-max">
                             <span className="text-gray-700 text-lg">Delivery:</span>
                             <span className="text-xl font-semibold pl-2">$4</span>
                         </div>
                     </div>
-                    <div className="-mt-1 flex justify-end mr-1 px-4 py-2">
+                    <div className="-mt-1 flex justify-end mr-1 px-4 py-2 pr-7">
                         <div className="py-2 px-4 rounded-xl bg-primary text-white max-w-max">
                             <span className="text-white text-xl">Total:</span>
                             <span className="text-xl font-semibold pl-2">${subTotal + 4}</span>
