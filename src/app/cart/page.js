@@ -5,6 +5,7 @@ import { useContext, useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { IoTrashOutline } from "react-icons/io5";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 export default function CartPage() {
     const session = useSession();
@@ -42,16 +43,30 @@ export default function CartPage() {
         e.preventDefault();
         //address and cart to db
         const address = {streetAddress, phone, postalCode, city, country};
-        const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                address,
-                cartProducts,
-            }),
+
+        const promise = new Promise((resolve, reject) => {
+            fetch('/api/checkout', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    address,
+                    cartProducts,
+                }),
+            }).then ( async (response) => {
+                if (response.ok) {
+                    resolve();
+                    window.location = await response.json();
+                } else {
+                    reject();
+                }
+            });
         });
-        const link = await response.json();
-        window.location = link;
+
+        await toast.promise(promise, {
+            loading: 'Preparing your order...',
+            success: 'Redirecting to payment...',
+            error: "Something went wrong... Please try again later",
+        })
     }
 
     return (
