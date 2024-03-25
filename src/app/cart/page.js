@@ -17,7 +17,14 @@ export default function CartPage() {
     const [postalCode, setPostalCode] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    console.log(cartProducts);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (window.location.href.includes('canceled=1')) {
+                toast.error('Payment failed');
+            }
+        }
+    }, [])
 
     useEffect(() => {
         if (status === 'authenticated') {
