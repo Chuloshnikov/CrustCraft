@@ -1,7 +1,7 @@
 "use client"
 import SectionHeaders from "@/components/layout/SectionHeaders";
 import { useState, useEffect, useContext } from "react";
-import { CartContext } from "@/components/AppContext";
+import { CartContext, cartProductPrice } from "@/components/AppContext";
 import { useParams } from "next/navigation";
 import OrderInputs from "../../../components/layout/OrderInputs"
 import CartProduct from "@/components/menu/CartProduct";
@@ -24,13 +24,20 @@ export default function OrderPage() {
                 })
             })
         }
-    },[]);
+    }, []);
+
+    let subTotal = 0;
+    if (order?.cartProducts) {
+        for (const product of order?.cartProducts) {
+            subTotal += cartProductPrice(product);
+        }
+    }
 
     return (
         <section className="max-w-2xl mx-auto mt-8">
             <div className="text-center">
                 <SectionHeaders mainHeader="Your order"/>
-                <div className="my-4 text-md font-medium">
+                <div className="mt-4 mb-8 text-md font-medium">
                     <p>Thanks for your order.</p>
                     <p>We will call you when order will be on the way</p>
                 </div>
@@ -44,7 +51,7 @@ export default function OrderPage() {
                         <div className="mt-4 flex justify-end px-2 py-1">
                             <div className="py-2 px-4 rounded-xl bg-white text-gray-700 max-w-max">
                                 <span className="text-gray-700 text-lg">Subtotal:</span>
-                                <span className="text-xl font-semibold pl-2">$15</span>
+                                <span className="text-xl font-semibold pl-2">${subTotal}</span>
                             </div>
                         </div>
                         <div className="-mt-1 flex justify-end px-2 py-1">
@@ -56,7 +63,7 @@ export default function OrderPage() {
                         <div className="-mt-1 flex justify-end px-4 py-2 -mr-2">
                         <div className="py-2 px-4 rounded-xl bg-primary text-white max-w-max">
                             <span className="text-white text-xl">Total:</span>
-                            <span className="text-xl font-semibold pl-2">${16}</span>
+                            <span className="text-xl font-semibold pl-2">${subTotal + 4}</span>
                         </div>
                     </div>
                     </div>
