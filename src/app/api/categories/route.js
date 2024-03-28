@@ -5,14 +5,22 @@ import { Category } from "../../../models/Category";
 export async function POST(req) {
     mongoose.connect(process.env.MONGODB_URL);
     const {name} = await req.json();
-    const categoryDoc = await Category.create({name});
-    return Response.json(categoryDoc);
+    if (await isAdmin()) {
+        const categoryDoc = await Category.create({name});
+        return Response.json(categoryDoc);
+    } else {
+        return Response.json({});
+    }
+    
 }
 
 export async function PUT(req) {
     mongoose.connect(process.env.MONGODB_URL);
     const { _id, name } = await req.json();
-    await Category.updateOne({_id}, {name});
+    if (await isAdmin()) {
+        await Category.updateOne({_id}, {name});
+    }
+    
     return Response.json(true);
 }
 

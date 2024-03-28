@@ -5,14 +5,21 @@ import mongoose from "mongoose";
 export async function POST(req) {
     mongoose.connect(process.env.MONGODB_URL);
     const data = await req.json();
-    const menuItemDoc = await MenuItem.create(data);
-    return Response.json(menuItemDoc);
+    if (await isAdmin()) {
+        const menuItemDoc = await MenuItem.create(data);
+        return Response.json(menuItemDoc);
+    } else {
+        return Response.json({});
+    }
 }
 
 export async function PUT(req) {
     mongoose.connect(process.env.MONGODB_URL);
-    const {_id, ...data} = await req.json();
-    await MenuItem.findByIdAndUpdate(_id, data);
+    if (await isAdmin()) {
+        const {_id, ...data} = await req.json();
+        await MenuItem.findByIdAndUpdate(_id, data);
+    }
+    
     return Response.json(true);
 }
 
@@ -20,7 +27,7 @@ export async function GET() {
     mongoose.connect(process.env.MONGODB_URL);
     return Response.json(
         await MenuItem.find()
-    )
+    );
 }
 
 export async function DELETE(req) {
