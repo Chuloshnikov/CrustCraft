@@ -44,6 +44,9 @@ const BurderMenu = ({ menuClose }) => {
                     Log out
                 </span>
             )}
+             {status === 'unauthenticated' && (
+                <Link href={'/login'}>Login</Link>
+            )}
     </nav>
   )
 }

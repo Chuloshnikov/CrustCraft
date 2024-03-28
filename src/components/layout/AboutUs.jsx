@@ -123,7 +123,7 @@ const AboutUs = () => {
           <Image src={'/noodles.svg'} width={200} height={200} alt={'sallad'}/>
         </div>
         <div
-        className='absolute -top-[70px] -rotate-45 right-0 -z-10'
+        className='xs:hidden md:block absolute -top-[70px] -rotate-45 right-0 -z-10'
         >
           <Image src={'/donut.svg'} width={200} height={200} alt={'sallad'}/>
         </div>
