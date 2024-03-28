@@ -4,6 +4,7 @@ import Link from "next/link";
 import { signOut, useSession } from 'next-auth/react';
 import { FaHamburger } from "react-icons/fa";
 import { IoMdBasket } from "react-icons/io";
+import { FaUserAlt } from "react-icons/fa";
 import BurgerMenu from "./BurderMenu";
 import {CartContext} from "@/components/AppContext";
 
@@ -73,15 +74,16 @@ const Header = () => {
             </Link>
         </nav>
         <nav
-        className='flex items-center xs:gap-6 sm:gap-8 text gray-500 font-semibold'
+        className='flex items-center gap-8 text gray-500 font-semibold'
         >
             {status === 'authenticated' && (
                 <>
                 <Link 
                 href={'/profile'} 
-                className='whitespace-nowrap'
+                className='flex gap-2 items-center'
                 >
-                    Hello, {userName}
+                    <span className='hidden md:block whitespace-nowrap'>Hello, {userName}</span>
+                    <FaUserAlt className='h-8 w-8 text-primary'/>
                 </Link>
                     <button
                         onClick={() => signOut()}
