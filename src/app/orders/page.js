@@ -27,16 +27,20 @@ export default function OrdersPage() {
             </div>
             <div className="mt-8">
                 {orders?.length > 0 && orders.map(order => (
-                    <div className="bg-gray-200 mb-2 p-4 rounded-lg grid grid-cols-3">
-                        <div className="text-gray-500">
-                            {order.userEmail}
-                        </div>
-                        <div className="text-center">
+                    <div className="bg-gray-200 mb-2 p-4 rounded-lg grid items-center grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
                             <span className={(order.paid ? 'bg-green-400' : 'bg-red-400') + ' p-2 rounded-md text-white'}>
-                                {order.paid ? 'Paid' : 'Not paid'}
-                            </span>
+                                    {order.paid ? 'Paid' : 'Not paid'}
+                                </span>
+                            </div>
+                        <div>
+                            {order.userEmail}
+                            <div className="text-gray-500 text-sm">
+                                {order.cartProducts.map(p => p.name).join(', ')}
+                            </div>
                         </div>
-                        <div className="text-right">
+                        <div className="justify-end flex gap-2 items-center whitespace-nowrap">
+                           
                             {dbReadableTime(order.createdAt)}
                         </div>
                     </div>
