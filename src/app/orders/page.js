@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import SectionHeaders from "@/components/layout/SectionHeaders";
 import UserTabs from "@/components/layout/UserTabs";
 import { useProfile } from "../../components/UseProfile";
+import {dbReadableTime} from "../../libs/datetime";
 
 
 export default function OrdersPage() {
@@ -12,7 +13,7 @@ export default function OrdersPage() {
     useEffect(() => {
         fetch('/api/orders').then(res => {
             res.json().then(orders => {
-                setOrders(orders);
+                setOrders(orders.reverse());
             })
         })
     }, []);
@@ -35,8 +36,8 @@ export default function OrdersPage() {
                                 {order.paid ? 'Paid' : 'Not paid'}
                             </span>
                         </div>
-                        <div>
-                            {order.createdAt}
+                        <div className="text-right">
+                            {dbReadableTime(order.createdAt)}
                         </div>
                     </div>
                 ))}
