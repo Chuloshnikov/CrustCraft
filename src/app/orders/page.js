@@ -4,6 +4,7 @@ import SectionHeaders from "@/components/layout/SectionHeaders";
 import UserTabs from "@/components/layout/UserTabs";
 import { useProfile } from "../../components/UseProfile";
 import {dbReadableTime} from "../../libs/datetime";
+import Link from "next/link";
 
 
 export default function OrdersPage() {
@@ -26,10 +27,14 @@ export default function OrdersPage() {
                 <SectionHeaders mainHeader={'Orders'}/>
             </div>
             <div className="mt-8">
-                {orders?.length > 0 && orders.map(order => (
-                    <div className="bg-gray-200 mb-2 p-4 rounded-lg grid items-center grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <span className={(order.paid ? 'bg-green-400' : 'bg-red-400') + ' p-2 rounded-md text-white'}>
+                {orders?.length > 0 && orders.map((order, index) => (
+                    <div key={index} className="bg-gray-200 mb-2 p-4 rounded-lg grid items-center grid-cols-1 md:grid-cols-3 gap-4">
+                        
+                        <div className="flex gap-2 md:gap-10 items-center">
+                        <div className="bg-white rounded-full flex font-semibold items-centerpy-1  px-2">
+                            {index + 1}
+                        </div>
+                                <span className={(order.paid ? 'bg-green-400' : 'bg-red-400') + ' p-2 rounded-md text-white'}>
                                     {order.paid ? 'Paid' : 'Not paid'}
                                 </span>
                             </div>
@@ -42,6 +47,12 @@ export default function OrdersPage() {
                         <div className="justify-end flex gap-2 items-center whitespace-nowrap">
                            
                             {dbReadableTime(order.createdAt)}
+                            <Link
+                            className="button" 
+                            href={'/orders/'+ order._id}
+                            >
+                                Show order
+                            </Link>
                         </div>
                     </div>
                 ))}
