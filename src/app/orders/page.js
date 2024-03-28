@@ -9,15 +9,22 @@ import Link from "next/link";
 
 export default function OrdersPage() {
     const [orders, setOrders] = useState([]);
+    const [loadingOrders, setLoadingOrders] = useState(false);
     const {loading, data: profile} = useProfile();
 
     useEffect(() => {
+        fetchOrders();
+    }, []);
+
+    function fetchOrders() {
+        setLoadingOrders(true);
         fetch('/api/orders').then(res => {
             res.json().then(orders => {
                 setOrders(orders.reverse());
+                setLoadingOrders(false);
             })
         })
-    }, []);
+    }
 
 
     return (
@@ -27,6 +34,9 @@ export default function OrdersPage() {
                 <SectionHeaders mainHeader={'Orders'}/>
             </div>
             <div className="mt-8">
+                {loadingOrders && (
+                    <div>Loading orders...</div>
+                )}
                 {orders?.length > 0 && orders.map((order, index) => (
                     <div key={index} className="bg-gray-200 mb-2 p-4 rounded-lg grid items-center grid-cols-1 md:grid-cols-3 gap-4">
                         
@@ -38,15 +48,16 @@ export default function OrdersPage() {
                                     {order.paid ? 'Paid' : 'Not paid'}
                                 </span>
                             </div>
-                        <div>
-                            {order.userEmail}
+                        <div className="flex flex-col grow">
+                            <span className="font-semibold">{order.userEmail}</span>
+                            <span className="font-semibold text-sm">{dbReadableTime(order.createdAt)}</span>
                             <div className="text-gray-500 text-sm">
                                 {order.cartProducts.map(p => p.name).join(', ')}
                             </div>
                         </div>
                         <div className="justify-end flex gap-2 items-center whitespace-nowrap">
                            
-                            {dbReadableTime(order.createdAt)}
+                            
                             <Link
                             className="button" 
                             href={'/orders/'+ order._id}
