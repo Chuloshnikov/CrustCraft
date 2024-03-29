@@ -6,6 +6,7 @@ import { FaHamburger } from "react-icons/fa";
 import { IoMdBasket } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import BurgerMenu from "./BurderMenu";
+import DesktopHeaderNavLinks from "../layout/DesktopHeaderNavLinks";
 import {CartContext} from "@/components/AppContext";
 
 const Header = () => {
@@ -38,6 +39,7 @@ const Header = () => {
     const handleMenuToggle = () => {
         setOpenBurgerMenu(!openBurgerMenu);
     }
+    console.log(window.innerWidth);
   return (
     <header className="flex items-center justify-between">
         
@@ -48,30 +50,7 @@ const Header = () => {
             >
             C<span className='hidden md:inline'>RUST</span>C<span className='hidden md:inline'>RAFT</span>
             </Link>
-            <Link
-            className='hidden lg:block' 
-            href={'/'}
-            >
-                Home
-            </Link>
-            <Link
-            className='hidden lg:block'  
-            href={'/menu'}
-            >
-                Menu
-            </Link>
-            <Link 
-            className='hidden lg:block'  
-            href={'/#about'}
-            >
-                About
-            </Link>
-            <Link 
-            className='hidden lg:block' 
-            href={'/#contact'}
-            >
-                Contact
-            </Link>
+            {window.innerWidth >= 960 && <DesktopHeaderNavLinks/>}
         </nav>
         <nav
         className='flex items-center gap-8 text gray-500 font-semibold'
