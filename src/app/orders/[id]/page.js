@@ -6,11 +6,14 @@ import { useParams } from "next/navigation";
 import OrderInputs from "../../../components/layout/OrderInputs"
 import CartProduct from "@/components/menu/CartProduct";
 import OrderStatus from "../../../components/layout/OrderStatus";
+import OrderStatusSwitcher from "../../../components/layout/OrderStatusSwitcher";
+import { useProfile } from '../../../components/UseProfile';
 
 export default function OrderPage() {
     const {clearCart} = useContext(CartContext);
     const [loadingOrder, setLoadingOrder] = useState(true);
     const [order, setOrder] = useState();
+    const {loading, data} = useProfile();
     const {id} = useParams();
 
     useEffect(() => {
@@ -78,6 +81,7 @@ export default function OrderPage() {
                         <OrderInputs disabled={true} addressProps={order}/>
                         <div className="mt-8">
                             <OrderStatus status={"Delivered"}/>
+                            {data?.admin && <OrderStatusSwitcher/>}
                         </div>
                     </div>
                 </div>
