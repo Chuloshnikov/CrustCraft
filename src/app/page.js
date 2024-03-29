@@ -2,6 +2,7 @@ import Hero from "../components/layout/Hero";
 import HomeMenu from "../components/layout/HomeMenu";
 import SectionHeaders from "../components/layout/SectionHeaders";
 import AboutUs from "../components/layout/AboutUs";
+import RestaurantsMap from "../components/layout/RestaurantsMap";
 
 
 
@@ -29,6 +30,7 @@ export default function Home() {
       >
         +77 787 78 78 77
       </a>
+      <RestaurantsMap/>
     </section>
   </>
   )
