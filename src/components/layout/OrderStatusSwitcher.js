@@ -4,13 +4,13 @@ import toast from 'react-hot-toast';
 import { redirect, useParams } from 'next/navigation';
 
 export default function OrderStatusSwitcher({ status }) {
-    const [orderStatus, setOrderStatus] = useState(status || "Payment verification");
+    const [orderStatus, setOrderStatus] = useState(status || "");
     const [redirectToOrders, setRedirectToOrders] = useState(false);
     const {id} = useParams();
 
-    async function handleStatusChange() {
+    async function handleStatusChange(e) {
         e.preventDefault();
-        const data = {status: orderStatus, _id: id};
+        const data = { orderStatus, _id: id};
         const savingPromise = new Promise(async (resolve, reject) => {
             const response = await fetch('/api/order-status', {
                 method: 'PUT',
@@ -41,8 +41,8 @@ export default function OrderStatusSwitcher({ status }) {
 
     return (
         <div>
-            <form onSubmit={() => {}}>
-            <label>Category</label>
+            <form onSubmit={handleStatusChange}>
+            <label>Status change</label>
                     <select value={orderStatus} onChange={e => setOrderStatus(e.target.value)}>
                         
                             <option value="Payment verification">Payment verification</option>

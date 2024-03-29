@@ -15,6 +15,7 @@ export default function OrderPage() {
     const [order, setOrder] = useState();
     const {loading, data} = useProfile();
     const {id} = useParams();
+    console.log(order);
 
     useEffect(() => {
         if (typeof window.console !== "undefined") {
@@ -80,8 +81,8 @@ export default function OrderPage() {
                     <div className="bg-white p-4 rounded-xl">
                         <OrderInputs disabled={true} addressProps={order}/>
                         <div className="mt-8">
-                            <OrderStatus status={"Delivered"}/>
-                            {data?.admin && <OrderStatusSwitcher/>}
+                            <OrderStatus status={order.orderStatus}/>
+                            {data?.admin && <OrderStatusSwitcher status={order.orderStatus}/>}
                         </div>
                     </div>
                 </div>
