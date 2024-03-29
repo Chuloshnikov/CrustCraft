@@ -9,7 +9,7 @@ const OrderSchema = new Schema({
     country: {type: String},
     cartProducts: Object,
     paid: {type: Boolean, default: false},
-    status: {type: String, default: "Payment verification"}
+    orderStatus: {type: String, default: "Payment verification"}
 }, {timestamps: true});
 
 
