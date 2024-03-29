@@ -1,4 +1,3 @@
-"use client"
 import { FaMoneyCheck } from "react-icons/fa";
 import { FaRegClock } from "react-icons/fa";
 import { GiCampCookingPot } from "react-icons/gi";
