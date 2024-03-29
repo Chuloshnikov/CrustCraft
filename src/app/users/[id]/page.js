@@ -185,7 +185,7 @@ export default function EditUserPage() {
                                 <div>
                                 <label className='p-2 flex items-center gap-2 border rounded-xl border-gray-300 bg-gray-200 mb-2' htmlFor='adminCheckbox'>
                                     <input 
-                                    onClick={e => setAdmin(e.target.checked)}
+                                    onChange={e => setAdmin(e.target.checked)}
                                     checked={admin} 
                                     value={'1'} 
                                     id="adminCheckbox" 

@@ -70,7 +70,7 @@ const MenuItem = (menuItem) => {
               alt={name} 
               width={300} 
               height={200}
-              className='mx-auto'
+              className='mx-auto rounded-lg'
               />
               <h2 className='text-lg font-bold text-center'>{name}</h2>
               <p className='text-center text-gray-600 text-sm mb-2'>{description}</p>
@@ -81,7 +81,7 @@ const MenuItem = (menuItem) => {
                     {sizes?.map((size, index) => (
                         <label key={index} className='py-1 border flex gap-2'>
                             <input 
-                            onClick={() => setSelectedSize(size)}
+                            onChange={() => setSelectedSize(size)}
                             checked={selectedSize?.name === size.name}
                             className='focus:ring-primary text-primary focus:text-primary dark:focus:ring-gray-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 focus:border-white ring-offset-0'
                             type="radio"
@@ -100,7 +100,7 @@ const MenuItem = (menuItem) => {
                     {extraIngredientPrices?.map((extra, index) => (
                         <label key={index} className='py-1 border flex gap-2'>
                             <input 
-                            onClick={e => handleExtraClick(e, extra)}
+                            onChange={e => handleExtraClick(e, extra)}
                             className='focus:ring-primary text-primary focus:text-primary dark:focus:ring-gray-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 focus:border-white ring-offset-0'
                             type="checkbox"
                             name={extra.name}
