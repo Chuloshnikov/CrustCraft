@@ -19,7 +19,8 @@ const Header = () => {
     if (userName && userName.includes(" ")) {
         userName = userName.split(' ')[0];
     }
-    
+
+    const windowWidth = window?.innerWidth;
     const gmailCredentials = userData?.email.indexOf("gmail");
 
     useEffect(() => {
@@ -39,7 +40,6 @@ const Header = () => {
     const handleMenuToggle = () => {
         setOpenBurgerMenu(!openBurgerMenu);
     }
-    console.log(window.innerWidth);
   return (
     <header className="flex items-center justify-between">
         
@@ -50,7 +50,7 @@ const Header = () => {
             >
             C<span className='hidden md:inline'>RUST</span>C<span className='hidden md:inline'>RAFT</span>
             </Link>
-            {window.innerWidth >= 960 && <DesktopHeaderNavLinks/>}
+            {windowWidth >= 960 && <DesktopHeaderNavLinks/>}
         </nav>
         <nav
         className='flex items-center gap-8 text gray-500 font-semibold'
