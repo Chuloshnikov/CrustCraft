@@ -62,7 +62,7 @@ const Header = () => {
                 className='flex gap-2 items-center'
                 >
                     <span className='hidden md:block whitespace-nowrap'>Hello, {userName}</span>
-                    <FaUserAlt className='h-8 w-8 text-primary'/>
+                    <FaUserAlt className='h-8 w-8 text-primary -mr-6'/>
                 </Link>
                     <button
                         onClick={() => signOut()}
@@ -74,7 +74,7 @@ const Header = () => {
                  
             )}
             {status === 'unauthenticated' && (
-                <>
+                <div className='flex gap-1 md:gap-8 items-center'>
                     <Link href={'/login'}>Login</Link>
                     <Link 
                     href={'/register'}
@@ -82,7 +82,7 @@ const Header = () => {
                     >
                         Register
                     </Link>
-                </>
+                </div>
             )}
             {status === 'loading' && (
                 <>
