@@ -76,3 +76,16 @@ div.tabs > *.active{
       transform: rotate(360deg);
   }
 }
+
+.inProgress {
+  animation: inProgress 1s ease infinite alternate;
+}
+
+@keyframes inProgress {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}

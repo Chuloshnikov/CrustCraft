@@ -5,6 +5,7 @@ import { CartContext, cartProductPrice } from "@/components/AppContext";
 import { useParams } from "next/navigation";
 import OrderInputs from "../../../components/layout/OrderInputs"
 import CartProduct from "@/components/menu/CartProduct";
+import OrderStatus from "../../../components/layout/OrderStatus";
 
 export default function OrderPage() {
     const {clearCart} = useContext(CartContext);
@@ -75,6 +76,9 @@ export default function OrderPage() {
                     </div>
                     <div className="bg-white p-4 rounded-xl">
                         <OrderInputs disabled={true} addressProps={order}/>
+                        <div className="mt-8">
+                            <OrderStatus status={"Delivered"}/>
+                        </div>
                     </div>
                 </div>
             )}
