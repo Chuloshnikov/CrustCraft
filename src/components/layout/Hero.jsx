@@ -42,7 +42,7 @@ const Hero = () => {
             </div>
         </div>
         <div
-        className='relative'
+        className='relative rotatingPizza'
         >
             <Image src={'/pizza.png'} width={659} height={653} alt={'pizza'}/>
         </div>
