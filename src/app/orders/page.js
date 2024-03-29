@@ -41,12 +41,16 @@ export default function OrdersPage() {
                     <div key={index} className="bg-gray-200 mb-2 p-4 rounded-lg grid items-center grid-cols-1 md:grid-cols-3 gap-4">
                         
                         <div className="flex gap-2 md:gap-10 items-center">
-                        <div className="bg-white rounded-full flex font-semibold items-centerpy-1  px-2">
+                        <div className="bg-white rounded-full flex font-semibold items-center px-2">
                             {index + 1}
                         </div>
-                                <span className={(order.paid ? 'bg-green-400' : 'bg-red-400') + ' p-2 rounded-md text-white'}>
-                                    {order.paid ? 'Paid' : 'Not paid'}
-                                </span>
+                        <div className="flex flex-col gap-1">
+                            <span className={(order.paid ? 'bg-green-400' : 'bg-red-400') + ' p-2 rounded-md text-white max-w-max'}>
+                                {order.paid ? 'Paid' : 'Not paid'}
+                            </span>
+                            <span className="text-sm font-semibold text-wrap">{order.orderStatus}</span>
+                        </div>
+                                
                             </div>
                         <div className="flex flex-col grow">
                             <span className="font-semibold">{order.userEmail}</span>
