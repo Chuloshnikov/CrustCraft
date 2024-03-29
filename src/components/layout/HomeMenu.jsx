@@ -41,7 +41,7 @@ const HomeMenu = () => {
         <SectionHeaders subHeader={'check out'} mainHeader={'Our Best Sellers'}/>
       </div>
           <div
-          className='grid grid-cols-1 mdl:grid-cols-3 gap-4 mt-4'
+          className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'
           >
             {bestSellers?.length > 0 && bestSellers.map(item => (
               <MenuItem key={item._id} {...item}/>

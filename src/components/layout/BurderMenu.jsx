@@ -45,12 +45,13 @@ const BurderMenu = ({ menuClose }) => {
             {status === 'authenticated' && (
                 <span
                 onClick={() => signOut()}
+                className="w-full bg-primary rounded-xl py-2 px-4 text-white"
                 >
                     Log out
                 </span>
             )}
              {status === 'unauthenticated' && (
-                <Link className="max-w-max" href={'/login'}>Login</Link>
+                <Link className="w-full bg-primary rounded-xl py-2 px-4 text-white" href={'/login'}>Login</Link>
             )}
     </nav>
   )
