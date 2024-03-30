@@ -41,6 +41,18 @@ export default function OrderStatus({ status }) {
         )
     }
 
+    if (status === "On delivery") {
+        return (
+            <div>
+                <h4 className="text-xs text-gray-600">Order status:</h4>
+                
+                <div className="mt-2 border border-gray-500 rounded-xl px-6 py-2 flex gap-2 items-center justify-center">
+                    <span>On delivery</span><TbTruckDeliver className="text-gray-600"/>
+                </div>
+            </div>
+        )
+    }
+
     if (status === "Delivered") {
         return (
             <div>

@@ -48,6 +48,7 @@ export default function OrderStatusSwitcher({ status }) {
                             <option value="Payment verification">Payment verification</option>
                             <option value="In progress">In progress</option>
                             <option value="Preparing">Preparing</option>
+                            <option value="On delivery">On delivery</option>
                             <option value="Delivered">Delivered</option>
                     </select>
                 <button type="submit">Change status</button>
