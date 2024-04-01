@@ -10,6 +10,7 @@ import DesktopHeaderNavLinks from "../layout/DesktopHeaderNavLinks";
 import {CartContext} from "@/components/AppContext";
 
 const Header = () => {
+    const [windowWidth, setWindowWidth] = useState(undefined);
     const [openBurgerMenu, setOpenBurgerMenu] = useState(false);
     const {cartProducts} = useContext(CartContext);
     const session = useSession();
@@ -20,7 +21,10 @@ const Header = () => {
         userName = userName.split(' ')[0];
     }
 
-    const windowWidth = window?.innerWidth;
+    useEffect(() => {
+        setWindowWidth(window?.innerWidth);
+    }, []);
+
     const gmailCredentials = userData?.email.indexOf("gmail");
 
     useEffect(() => {
