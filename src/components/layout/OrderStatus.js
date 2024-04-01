@@ -3,6 +3,7 @@ import { FaRegClock } from "react-icons/fa";
 import { GiCampCookingPot } from "react-icons/gi";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaCheckSquare } from "react-icons/fa";
+import { MdError } from "react-icons/md";
 
 export default function OrderStatus({ status }) {
 
@@ -64,4 +65,17 @@ export default function OrderStatus({ status }) {
             </div>
         )
     }
+
+    if (status === "Declined") {
+        return (
+            <div>
+                <h4 className="text-xs text-gray-600">Order status:</h4>
+                
+                <div className="mt-2 border border-gray-500 rounded-xl px-6 py-2 flex gap-2 items-center justify-center">
+                    <span>Declined</span><MdError className="text-gray-600"/>
+                </div>
+            </div>
+        )
+    }
+
 }
