@@ -46,7 +46,7 @@ export default function OrderStatusSwitcher({ status }) {
                     <select value={orderStatus} onChange={e => setOrderStatus(e.target.value)}>
                         
                             <option value="Payment verification">Payment verification</option>
-                            <option value="Declined">Delivered</option>
+                            <option value="Declined">Declined</option>
                             <option value="In progress">In progress</option>
                             <option value="Preparing">Preparing</option>
                             <option value="On delivery">On delivery</option>
